@@ -7,7 +7,8 @@ export default function ExperienceSection() {
       index: '00',
       role: 'Machine Learning and Data Engineering Intern',
       organization: 'Viswam AI',
-      period: '2023–Present',
+      period: '2023–2024',
+      status: 'COMPLETED',
       location: 'Hyderabad, India',
       category: 'ENGINEERING & DEEP LEARNING',
       metrics: ['15GB+ Ingestion Pipeline', '-20% Deployment Latency', '-15% EC2 Compute Overhead'],
@@ -22,6 +23,7 @@ export default function ExperienceSection() {
       role: 'Director of Programs and Operations',
       organization: 'Chitran Institute of Drawing, Painting, Music, Dance & Handwriting',
       period: '2022–Present',
+      status: 'PRESENT',
       location: 'Hyderabad, India',
       category: 'DIGITAL OPERATIONS & GROWTH',
       metrics: ['+120% Enrollment Growth', '3,000+ Instagram Community', 'Rank Math SEO Leadership'],
@@ -36,7 +38,8 @@ export default function ExperienceSection() {
       role: 'Project Executive & Facilitator',
       organization: 'Bajaj Foundation',
       period: 'Present',
-      location: 'Hyderabad, India',
+      status: 'PRESENT',
+      location: 'Government of Telangana Program',
       category: 'GOVERNMENT CIVIC PROGRAM',
       metrics: ['Govt of Telangana Program', 'Multi-Stakeholder Coordination'],
       bullets: [
@@ -49,7 +52,8 @@ export default function ExperienceSection() {
       role: 'City Operations Head, Hyderabad',
       organization: 'Boundless, IITM BS Travel Society',
       period: 'May 2025–Present',
-      location: 'Hyderabad, India',
+      status: 'PRESENT',
+      location: 'Hyderabad (Hybrid)',
       category: 'COLLEGIATE NETWORK LEADERSHIP',
       metrics: ['Official City Representative', 'Tour Logistics & Meetups'],
       bullets: [
@@ -61,7 +65,8 @@ export default function ExperienceSection() {
       index: '04',
       role: 'Core Member',
       organization: 'Diplomacia',
-      period: 'Jun 2024–Present',
+      period: 'Jun 2024–Nov 2024',
+      status: 'COMPLETED',
       location: 'Hyderabad, India',
       category: 'DEBATE & EXECUTIVE SCREENING',
       metrics: ['JAM Rounds & Forensics', 'Executive Board Selections'],
@@ -75,7 +80,8 @@ export default function ExperienceSection() {
       role: 'Public Relations Specialist',
       organization: 'NebulaPioneers',
       period: 'Jul 2024–Present',
-      location: 'Hyderabad, India',
+      status: 'PRESENT',
+      location: 'Hyderabad (On-site)',
       category: 'OUTREACH & INTERVIEWS',
       metrics: ['Candidate Interview Pipelines', 'Cross-Functional Outreach'],
       bullets: [
@@ -181,12 +187,30 @@ export default function ExperienceSection() {
                     fontSize: '0.78rem',
                     color: 'var(--text-muted)',
                     display: 'flex',
+                    flexWrap: 'wrap',
                     alignItems: 'center',
-                    gap: '0.75rem',
+                    gap: '0.65rem',
                   }}
                 >
-                  <span>{item.period}</span>
-                  <span>//</span>
+                  {item.status === 'PRESENT' ? (
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', color: 'var(--signal-emerald)', fontWeight: 600 }}>
+                      <span
+                        style={{
+                          width: '6px',
+                          height: '6px',
+                          borderRadius: '50%',
+                          backgroundColor: 'var(--signal-emerald)',
+                          boxShadow: '0 0 6px var(--signal-emerald)',
+                        }}
+                      />
+                      {item.period} [ACTIVE]
+                    </span>
+                  ) : (
+                    <span style={{ color: 'var(--text-primary)' }}>
+                      {item.period} <span style={{ color: 'var(--text-muted)', fontSize: '0.72rem' }}>[COMPLETED]</span>
+                    </span>
+                  )}
+                  <span style={{ color: 'var(--border-subtle)' }}>//</span>
                   <span>{item.location}</span>
                 </div>
 
