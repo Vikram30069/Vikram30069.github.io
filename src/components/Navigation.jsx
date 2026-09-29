@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Terminal, ShieldAlert, Cpu, Award, Mail, ExternalLink, Activity } from 'lucide-react';
+import { Terminal, ShieldAlert, Cpu, Award, Mail, ExternalLink, Activity, Menu, X, Download } from 'lucide-react';
 
 export default function Navigation({ activeSection = 'hero' }) {
   const [currentTime, setCurrentTime] = useState('');
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Close mobile drawer on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [mobileMenuOpen]);
 
   // Live Hyderabad Clock (UTC+05:30)
   useEffect(() => {
@@ -71,6 +82,7 @@ export default function Navigation({ activeSection = 'hero' }) {
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
           <button
             onClick={() => scrollTo('hero')}
+            aria-label="Vikram Banerjee Home"
             style={{
               background: 'none',
               border: 'none',
@@ -162,6 +174,8 @@ export default function Navigation({ activeSection = 'hero' }) {
                   e.currentTarget.style.borderColor = 'transparent';
                 }
               }}
+              aria-current={activeSection === item.id ? 'page' : undefined}
+              aria-label={`Jump to section ${item.index}: ${item.label}`}
             >
               <span style={{ color: activeSection === item.id ? 'var(--signal-cyan)' : 'var(--text-muted)', fontSize: '0.7rem' }}>
                 {item.index}
@@ -169,39 +183,91 @@ export default function Navigation({ activeSection = 'hero' }) {
               <span>{item.label}</span>
             </button>
           ))}
+
+          {/* Desktop Direct Resume Access */}
+          <a
+            href="/resume.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-secondary"
+            aria-label="View or Download Vikram Banerjee Technical Resume"
+            style={{
+              padding: '0.38rem 0.85rem',
+              fontSize: '0.74rem',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.35rem',
+              marginLeft: '0.4rem',
+            }}
+          >
+            <Download size={13} />
+            <span>Resume</span>
+          </a>
         </nav>
 
-        {/* Mobile Menu Toggle */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="mobile-nav-toggle"
-          style={{
-            display: 'none',
-            background: 'rgba(255, 255, 255, 0.05)',
-            border: '1px solid var(--border-subtle)',
-            color: 'var(--text-high)',
-            padding: '0.5rem 0.75rem',
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.78rem',
-            borderRadius: '2px',
-            cursor: 'pointer',
-          }}
-          aria-label="Toggle Navigation Index"
-        >
-          {mobileMenuOpen ? '[CLOSE]' : '[INDEX]'}
-        </button>
+        {/* Mobile Quick Action Bar */}
+        <div className="mobile-actions" style={{ display: 'none', alignItems: 'center', gap: '0.65rem' }}>
+          <a
+            href="/resume.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-secondary"
+            aria-label="View or Download Vikram Banerjee Resume"
+            style={{
+              padding: '0.45rem 0.85rem',
+              fontSize: '0.74rem',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.35rem',
+            }}
+          >
+            <Download size={13} />
+            <span>Resume</span>
+          </a>
+
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="mobile-nav-toggle"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.45rem',
+              background: mobileMenuOpen ? 'rgba(0, 240, 255, 0.15)' : 'rgba(255, 255, 255, 0.06)',
+              border: mobileMenuOpen ? '1px solid var(--signal-cyan)' : '1px solid var(--border-subtle)',
+              color: 'var(--text-high)',
+              padding: '0.45rem 0.85rem',
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.78rem',
+              borderRadius: '2px',
+              cursor: 'pointer',
+              minHeight: '44px',
+            }}
+            aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation-menu"
+          >
+            {mobileMenuOpen ? <X size={15} /> : <Menu size={15} />}
+            <span>{mobileMenuOpen ? 'CLOSE' : 'MENU'}</span>
+          </button>
+        </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* High-Usability Mobile Navigation Drawer */}
       {mobileMenuOpen && (
         <div
+          id="mobile-navigation-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile Navigation Menu"
           style={{
             backgroundColor: 'rgba(7, 8, 12, 0.98)',
             borderBottom: '1px solid var(--border-subtle)',
-            padding: '1.5rem',
+            padding: '1.25rem 1.5rem 2rem',
             display: 'flex',
             flexDirection: 'column',
-            gap: '0.75rem',
+            gap: '0.5rem',
+            maxHeight: 'calc(100vh - 4.5rem)',
+            overflowY: 'auto',
           }}
         >
           {navItems.map((item) => (
@@ -209,23 +275,50 @@ export default function Navigation({ activeSection = 'hero' }) {
               key={item.id}
               onClick={() => scrollTo(item.id)}
               style={{
-                background: 'none',
-                border: 'none',
-                color: 'var(--text-high)',
+                background: activeSection === item.id ? 'rgba(0, 240, 255, 0.08)' : 'rgba(255, 255, 255, 0.02)',
+                border: activeSection === item.id ? '1px solid rgba(0, 240, 255, 0.3)' : '1px solid rgba(255, 255, 255, 0.04)',
+                color: activeSection === item.id ? 'var(--signal-cyan)' : 'var(--text-high)',
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.9rem',
+                fontSize: '0.95rem',
                 textAlign: 'left',
-                padding: '0.5rem 0',
+                padding: '0.85rem 1.15rem',
+                borderRadius: '3px',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '1rem',
+                justifyContent: 'space-between',
                 cursor: 'pointer',
+                minHeight: '48px',
+                width: '100%',
               }}
+              aria-label={`Navigate to section ${item.index}: ${item.label}`}
             >
-              <span style={{ color: 'var(--signal-cyan)' }}>{item.index}</span>
-              <span>{item.label}</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+                <span style={{ color: 'var(--signal-cyan)', fontSize: '0.8rem', fontWeight: 600 }}>{item.index}</span>
+                <span style={{ fontWeight: 600 }}>{item.label}</span>
+              </div>
+              <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>&rarr;</span>
             </button>
           ))}
+
+          {/* Direct Resume CTA inside Mobile Menu */}
+          <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--border-subtle)' }}>
+            <a
+              href="/resume.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-signal"
+              style={{
+                width: '100%',
+                justifyContent: 'center',
+                minHeight: '48px',
+                fontSize: '0.88rem',
+              }}
+              aria-label="Download or View Vikram Banerjee Technical Resume"
+            >
+              <Download size={16} />
+              <span>Download Technical Resume</span>
+            </a>
+          </div>
         </div>
       )}
 
@@ -238,7 +331,7 @@ export default function Navigation({ activeSection = 'hero' }) {
           .desktop-nav {
             display: flex !important;
           }
-          .mobile-nav-toggle {
+          .mobile-actions {
             display: none !important;
           }
         }
@@ -246,8 +339,8 @@ export default function Navigation({ activeSection = 'hero' }) {
           .desktop-nav {
             display: none !important;
           }
-          .mobile-nav-toggle {
-            display: block !important;
+          .mobile-actions {
+            display: flex !important;
           }
         }
       `}</style>

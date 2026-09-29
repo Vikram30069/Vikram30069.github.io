@@ -100,6 +100,7 @@ export default function ContactSection() {
                   className="btn-secondary"
                   style={{ padding: '0.8rem 1rem' }}
                   title="Copy email address"
+                  aria-label="Copy email address to clipboard"
                 >
                   {copied ? <Check size={16} color="var(--signal-emerald)" /> : <Copy size={16} />}
                 </button>
@@ -214,10 +215,14 @@ export default function ContactSection() {
 
             <form onSubmit={handleTransmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
               <div>
-                <label style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--text-muted)', marginBottom: '0.35rem' }}>
+                <label
+                  htmlFor="contact-sender-name"
+                  style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--text-muted)', marginBottom: '0.35rem' }}
+                >
                   YOUR IDENTIFIER / NAME:
                 </label>
                 <input
+                  id="contact-sender-name"
                   type="text"
                   value={senderName}
                   onChange={(e) => setSenderName(e.target.value)}
@@ -238,10 +243,14 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--text-muted)', marginBottom: '0.35rem' }}>
+                <label
+                  htmlFor="contact-message-intent"
+                  style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--text-muted)', marginBottom: '0.35rem' }}
+                >
                   COMMUNICATION PURPOSE:
                 </label>
                 <select
+                  id="contact-message-intent"
                   value={messageIntent}
                   onChange={(e) => setMessageIntent(e.target.value)}
                   style={{
@@ -265,10 +274,14 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--text-muted)', marginBottom: '0.35rem' }}>
+                <label
+                  htmlFor="contact-custom-note"
+                  style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--text-muted)', marginBottom: '0.35rem' }}
+                >
                   TRANSMISSION PAYLOAD / NOTE:
                 </label>
                 <textarea
+                  id="contact-custom-note"
                   value={customNote}
                   onChange={(e) => setCustomNote(e.target.value)}
                   rows={4}

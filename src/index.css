@@ -26,12 +26,12 @@
   --alert-red-dim: rgba(255, 51, 68, 0.18);
   --alert-red-glow: rgba(255, 51, 68, 0.45);
 
-  /* Neutral Tone Scale */
+  /* Neutral Tone Scale (Calibrated for WCAG AA >= 4.5:1 contrast) */
   --text-high: #f8fafc;
   --text-primary: #e2e8f0;
   --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --text-subtle: #475569;
+  --text-muted: #8494ab;
+  --text-subtle: #64748b;
 
   /* Architectural Grid & Borders */
   --border-subtle: rgba(255, 255, 255, 0.08);
@@ -127,10 +127,48 @@ body {
   background: var(--signal-cyan);
 }
 
-/* Focus Visible Accessibility */
-:focus-visible {
-  outline: 2px solid var(--signal-cyan);
+/* Accessibility Skip Link */
+.skip-to-content {
+  position: fixed;
+  top: -120px;
+  left: 1.5rem;
+  background: var(--signal-cyan);
+  color: #05070a;
+  padding: 0.75rem 1.4rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.85rem;
+  z-index: 9999;
+  border-radius: 2px;
+  text-decoration: none;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+  transition: top 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skip-to-content:focus {
+  top: 1.5rem;
+  outline: 3px solid #ffffff;
   outline-offset: 3px;
+}
+
+/* Strict High-Contrast Focus Visible */
+:focus-visible {
+  outline: 2px solid var(--signal-cyan) !important;
+  outline-offset: 3px !important;
+}
+
+/* Minimum Accessible Touch Target for Mobile Usability (WCAG 2.5.5 / 2.5.8) */
+@media (max-width: 768px) {
+  button, 
+  a.btn-signal, 
+  a.btn-secondary,
+  .telemetry-badge,
+  input, 
+  select, 
+  textarea {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
 }
 
 /* Monospace Utilities */

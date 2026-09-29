@@ -68,6 +68,8 @@ export default function AboutSection() {
             >
               <button
                 onClick={() => setActiveTab('engineering')}
+                aria-pressed={activeTab === 'engineering'}
+                aria-label="View technical architecture background"
                 style={{
                   background: activeTab === 'engineering' ? 'var(--signal-cyan)' : 'transparent',
                   color: activeTab === 'engineering' ? '#000' : 'var(--text-secondary)',
@@ -85,6 +87,8 @@ export default function AboutSection() {
               </button>
               <button
                 onClick={() => setActiveTab('operations')}
+                aria-pressed={activeTab === 'operations'}
+                aria-label="View operations and civic impact background"
                 style={{
                   background: activeTab === 'operations' ? 'var(--signal-cyan)' : 'transparent',
                   color: activeTab === 'operations' ? '#000' : 'var(--text-secondary)',
@@ -237,6 +241,8 @@ export default function AboutSection() {
                 <div style={{ display: 'flex', gap: '0.35rem' }}>
                   <button
                     onClick={() => setProofRecord('paytm')}
+                    aria-pressed={proofRecord === 'paytm'}
+                    aria-label="View Paytm Hackathon field record and team recognition"
                     style={{
                       background: proofRecord === 'paytm' ? 'var(--signal-cyan)' : 'rgba(255,255,255,0.03)',
                       color: proofRecord === 'paytm' ? '#000' : 'var(--text-muted)',
@@ -253,6 +259,8 @@ export default function AboutSection() {
                   </button>
                   <button
                     onClick={() => setProofRecord('chitran')}
+                    aria-pressed={proofRecord === 'chitran'}
+                    aria-label="View Chitran Institute web growth field record"
                     style={{
                       background: proofRecord === 'chitran' ? 'var(--signal-emerald)' : 'rgba(255,255,255,0.03)',
                       color: proofRecord === 'chitran' ? '#000' : 'var(--text-muted)',

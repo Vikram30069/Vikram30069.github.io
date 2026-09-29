@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vikram Banerjee — Technical Resume</title>
+  <style>
+    :root {
+      --primary: #0f172a;
+      --secondary: #334155;
+      --accent: #0284c7;
+      --border: #cbd5e1;
+      --bg: #ffffff;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #f8fafc;
+      color: var(--primary);
+      line-height: 1.45;
+      font-size: 13px;
+      padding: 24px;
+    }
+    .resume-container {
+      max-width: 820px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 40px 48px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    header {
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 16px;
+      margin-bottom: 18px;
+    }
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .subtitle {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .contact-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--secondary);
+    }
+    .contact-bar a {
+      color: var(--secondary);
+      text-decoration: none;
+    }
+    .contact-bar a:hover { text-decoration: underline; color: var(--accent); }
+    section { margin-bottom: 18px; }
+    h2 {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--primary);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 4px;
+      margin-bottom: 10px;
+    }
+    .entry { margin-bottom: 12px; }
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .entry-sub {
+      display: flex;
+      justify-content: space-between;
+      color: var(--secondary);
+      font-size: 12px;
+      font-style: italic;
+      margin-bottom: 4px;
+    }
+    ul { list-style-position: outside; margin-left: 16px; color: #1e293b; }
+    li { margin-bottom: 3px; font-size: 12.5px; }
+    .skill-group { margin-bottom: 6px; font-size: 12.5px; }
+    .skill-title { font-weight: 700; color: var(--primary); }
+    .actions-bar {
+      max-width: 820px;
+      margin: 0 auto 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn-print {
+      background: #0284c7;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .btn-print:hover { background: #0369a1; }
+    .btn-back {
+      color: #475569;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .btn-back:hover { text-decoration: underline; }
+    @media print {
+      body { background: #fff; padding: 0; }
+      .resume-container { border: none; box-shadow: none; padding: 0; }
+      .actions-bar { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="actions-bar">
+    <a href="/" class="btn-back">&larr; Back to Portfolio</a>
+    <button class="btn-print" onclick="window.print()">Print / Save as PDF</button>
+  </div>
+
+  <main class="resume-container">
+    <header>
+      <h1>VIKRAM BANERJEE</h1>
+      <div class="subtitle">AI Systems Engineer &bull; Data Science &bull; Software Engineering</div>
+      <div class="contact-bar">
+        <span>Hyderabad, India</span>
+        <span>&bull;</span>
+        <a href="mailto:vikramb9291@gmail.com">vikramb9291@gmail.com</a>
+        <span>&bull;</span>
+        <span>+91 6304589007</span>
+        <span>&bull;</span>
+        <a href="https://github.com/Vikram30069" target="_blank">github.com/Vikram30069</a>
+        <span>&bull;</span>
+        <a href="https://linkedin.com/in/vikram-banerjee-a10111282" target="_blank">linkedin.com/in/vikram-banerjee</a>
+      </div>
+    </header>
+
+    <section>
+      <h2>Education</h2>
+      <div class="entry">
+        <div class="entry-header">
+          <span>Indian Institute of Technology Madras (IIT Madras)</span>
+          <span>Expected 2027</span>
+        </div>
+        <div class="entry-sub">
+          <span>Bachelor of Science (B.Sc.) in Data Science and Applications</span>
+          <span>Chennai / Online</span>
+        </div>
+        <ul>
+          <li>Focus: Machine Learning, Statistical Inference, Mathematical Anomaly Detection, Database Management.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span>Matrusri Engineering College</span>
+          <span>Expected 2027</span>
+        </div>
+        <div class="entry-sub">
+          <span>Bachelor of Engineering (B.E.) in Computer Science and Engineering</span>
+          <span>Hyderabad, India</span>
+        </div>
+        <ul>
+          <li>Focus: Data Structures &amp; Algorithms, Distributed Systems, Asynchronous Networks, Cloud Computing.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Featured Production Systems</h2>
+      <div class="entry">
+        <div class="entry-header">
+          <span>Datadrishti (Paytm IntentGuard) — Contextual Payment Security Layer</span>
+          <a href="https://github.com/Vikram30069/datadrishti" target="_blank" style="color:var(--accent);font-size:12px;">github.com/Vikram30069/datadrishti</a>
+        </div>
+        <ul>
+          <li>Architected behavioral anomaly detection engine protecting UPI transfers against coercion, duress, and panic-induced financial fraud.</li>
+          <li>Evaluates transactions against individual Median and Median Absolute Deviation (MAD) distributions instead of outlier-skewed averages.</li>
+          <li>Calibrated 6 risk vectors (Amount, Recipient, Device, Time, Geo, Velocity Surges) mapped to adaptive friction policies (0-30 frictionless, 56-80 biometrics, &gt;80 hold).</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span>RescueNet AI — Multi-Agent Disaster Response &amp; Dispatcher</span>
+          <a href="https://github.com/Vikram30069/RescueNet-AI" target="_blank" style="color:var(--accent);font-size:12px;">github.com/Vikram30069/RescueNet-AI</a>
+        </div>
+        <ul>
+          <li>Engineered 10-agent CrewAI pipeline (triage, resource allocation, hospital matching, automated voice/SMS dispatch) with strict task-context chaining.</li>
+          <li>FastAPI backend (Pydantic v2), PostgreSQL/Supabase index of 148 Telangana emergency facilities, Twilio WhatsApp and automated voice dispatch.</li>
+          <li>Multi-provider LLM support (Gemini, Claude, GPT-4o, Ollama, LiteLLM) deployed on AWS (ECS, RDS, S3, CloudFront, Bedrock).</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span>NodIn — Computer Vision Framework with Anti-Spoofing Geofencing</span>
+          <a href="https://github.com/Vikram30069/NodIn" target="_blank" style="color:var(--accent);font-size:12px;">github.com/Vikram30069/NodIn</a>
+        </div>
+        <ul>
+          <li>Real-time facial recognition and attendance automation pipeline applying matrix transformations directly to continuous live video feeds.</li>
+          <li>Integrated anti-spoofing geofence logic restricting biometric registration strictly to validated physical GPS/Wi-Fi polygon perimeters.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span>Chitran Institute — Digital Ecosystem &amp; Growth Engine (Client Shipped)</span>
+          <a href="https://github.com/Vikram30069/chitran-digital-ecosystem" target="_blank" style="color:var(--accent);font-size:12px;">github.com/Vikram30069/chitran-digital-ecosystem</a>
+        </div>
+        <ul>
+          <li>Engineered full digital infrastructure, Google Business Profile API sync, and Rank Math SEO for 23-year-old arts institution.</li>
+          <li>Increased active student enrollment by 120% YoY through optimized high-conversion student acquisition funnels.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Experience &amp; Leadership</h2>
+      <div class="entry">
+        <div class="entry-header">
+          <span>Viswam AI &mdash; Machine Learning and Data Engineering Intern</span>
+          <span>2023 &ndash; Present</span>
+        </div>
+        <ul>
+          <li>Engineered automated data ingestion/cleansing pipelines processing 15GB+ of unstructured data.</li>
+          <li>Contributed to regional LLM prototype optimization, reducing deployment latency by 20% and EC2 compute overhead by 15%.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span>Chitran Institute &mdash; Director of Programs and Operations</span>
+          <span>2022 &ndash; Present</span>
+        </div>
+        <ul>
+          <li>Manages institutional web platform, SEO, and reputation management; scaled Instagram community to 3,000+ followers.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span>Bajaj Foundation &mdash; Project Executive &amp; Facilitator (Govt of Telangana Program)</span>
+          <span>Present</span>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span>Boundless, IITM BS Travel Society &mdash; City Operations Head, Hyderabad</span>
+          <span>May 2025 &ndash; Present</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Certifications &amp; Distinctions</h2>
+      <ul>
+        <li><strong>AWS Academy / AICTE EduSkills</strong>: Data Engineering Virtual Internship (8 weeks), Grade A (Cert ID: <code>4bba844946995c080f93</code>).</li>
+        <li><strong>Gold Medalist</strong>: National Science Olympiad (NSO, 2019–2021) &amp; International Mathematics Olympiad (IMO, 2020–2021).</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Technical Skills</h2>
+      <div class="skill-group"><span class="skill-title">Languages:</span> Python, SQL, Java, JavaScript, TypeScript, C</div>
+      <div class="skill-group"><span class="skill-title">AI &amp; ML:</span> CrewAI, LangChain, PyTorch, TensorFlow, Scikit-learn, XGBoost, OpenCV</div>
+      <div class="skill-group"><span class="skill-title">Cloud &amp; Systems:</span> AWS (ECS, RDS, S3, CloudFront, Bedrock), Docker, FastAPI, PostgreSQL, Supabase, Redis, GitHub CI/CD</div>
+      <div class="skill-group"><span class="skill-title">Integrations &amp; Web:</span> Twilio (Voice/WhatsApp), OpenAI, Gemini, Ollama, LiteLLM, Next.js, MERN Stack</div>
+    </section>
+  </main>
+</body>
+</html>

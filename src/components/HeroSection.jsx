@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, ShieldAlert, Cpu, Terminal, ArrowUpRight, Radio, RefreshCw } from 'lucide-react';
+import { Mail, ShieldAlert, Cpu, Terminal, ArrowUpRight, Radio, RefreshCw, Layers, Download } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 import SignalCanvas3D from './SignalCanvas3D';
 
@@ -61,6 +61,7 @@ export default function HeroSection() {
           }}
         >
           {/* Left Column: Thesis & Statement */}
+          {/* Left Column: Executive Positioning & Direct CTAs */}
           <div
             style={{
               opacity: loaded ? 1 : 0,
@@ -68,16 +69,7 @@ export default function HeroSection() {
               transition: 'opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
-              <span className="telemetry-badge badge-cyan">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#00f0ff] animate-ping" />
-                IIT MADRAS B.SC + MATRUSRI B.E
-              </span>
-              <span className="telemetry-badge">
-                CLASS OF 2027
-              </span>
-            </div>
-
+            {/* Semantic Single H1 */}
             <h1
               className="font-display"
               style={{
@@ -86,7 +78,7 @@ export default function HeroSection() {
                 lineHeight: 1.04,
                 letterSpacing: '-0.035em',
                 color: 'var(--text-high)',
-                marginBottom: '1.75rem',
+                marginBottom: '0.85rem',
               }}
             >
               VIKRAM<br />
@@ -101,60 +93,75 @@ export default function HeroSection() {
               </span>
             </h1>
 
-            {/* Positioning line: EXACT facts from brief */}
+            {/* Subtitle / Focus Disciplines */}
+            <div
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'clamp(1.05rem, 1.4vw, 1.25rem)',
+                color: 'var(--signal-cyan)',
+                fontWeight: 600,
+                letterSpacing: '0.01em',
+                marginBottom: '1.25rem',
+              }}
+            >
+              AI Systems Engineer &middot; Data Science &middot; Software Engineering
+            </div>
+
+            {/* Executive Statement */}
             <p
               style={{
-                fontSize: 'clamp(1.05rem, 1.35vw, 1.25rem)',
+                fontSize: 'clamp(1.05rem, 1.25vw, 1.2rem)',
                 color: 'var(--text-primary)',
-                lineHeight: 1.6,
+                lineHeight: 1.65,
                 maxWidth: '620px',
                 marginBottom: '2rem',
                 fontFamily: 'var(--font-sans)',
               }}
             >
-              Dual-degree Computer Science &amp; Data Science undergraduate who builds{' '}
-              <strong style={{ color: 'var(--signal-cyan)', fontWeight: 600 }}>multi-agent AI</strong>,{' '}
-              <strong style={{ color: '#f8fafc', fontWeight: 600 }}>behavioral fraud-detection</strong>, and{' '}
-              <strong style={{ color: '#f8fafc', fontWeight: 600 }}>computer vision systems</strong> — and separately runs real digital operations and civic leadership work outside the classroom.
+              Computer Science and Data Science undergraduate building intelligent systems across multi-agent AI, fraud detection, computer vision and real-world operational platforms.
             </p>
 
-            {/* Real-time Oscilloscope Telemetry Line */}
+            {/* Immediate Action Buttons (View Selected Work & Download Resume + Socials) */}
             <div
               style={{
                 display: 'flex',
+                flexWrap: 'wrap',
+                gap: '0.85rem',
                 alignItems: 'center',
-                gap: '1.25rem',
-                padding: '0.75rem 1rem',
-                background: 'rgba(12, 16, 24, 0.7)',
-                border: '1px solid var(--border-subtle)',
-                borderRadius: '4px',
-                marginBottom: '2.5rem',
-                maxWidth: '520px',
+                marginBottom: '2rem',
               }}
             >
-              <div className="signal-live-bar">
-                <div className="signal-bar-segment" style={{ animationDelay: '0s' }} />
-                <div className="signal-bar-segment" style={{ animationDelay: '0.2s' }} />
-                <div className="signal-bar-segment" style={{ animationDelay: '0.4s' }} />
-                <div className="signal-bar-segment" style={{ animationDelay: '0.1s' }} />
-                <div className="signal-bar-segment" style={{ animationDelay: '0.3s' }} />
-                <div className="signal-bar-segment" style={{ animationDelay: '0.5s' }} />
-              </div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
-                <span style={{ color: 'var(--signal-cyan)' }}>SIGNAL PROTOCOL:</span> 4 PRODUCTION ARCHITECTURES ACTIVE (INCL. CLIENT SHIPPED)
-              </div>
-            </div>
+              <a
+                href="#projects"
+                className="btn-signal"
+                aria-label="View Selected Work and Flagship Projects"
+              >
+                <Layers size={16} />
+                <span>View Selected Work</span>
+              </a>
 
-            {/* Primary Action Buttons */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
+              <a
+                href="/resume.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary"
+                aria-label="Download or View Vikram Banerjee Technical Resume"
+              >
+                <Download size={16} />
+                <span>Download Resume</span>
+              </a>
+
               <a
                 href="https://github.com/Vikram30069"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-signal"
+                className="btn-secondary"
+                aria-label="Visit Vikram Banerjee GitHub Repositories"
+                style={{ padding: '0.8rem 1rem' }}
+                title="GitHub Repositories"
               >
                 <GithubIcon size={16} />
-                <span>GITHUB // REPOSITORIES</span>
+                <span>GitHub</span>
               </a>
 
               <a
@@ -162,20 +169,50 @@ export default function HeroSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-secondary"
+                aria-label="Visit Vikram Banerjee LinkedIn Profile"
+                style={{ padding: '0.8rem 1rem' }}
+                title="LinkedIn Profile"
               >
                 <LinkedinIcon size={16} />
-                <span>LINKEDIN // PROFILE</span>
+                <span>LinkedIn</span>
               </a>
+            </div>
 
-              <a
-                href="mailto:vikramb9291@gmail.com"
-                className="btn-secondary"
-                style={{ padding: '0.8rem 1.1rem' }}
-                title="Send transmission to Vikram"
-              >
-                <Mail size={16} />
-                <span>vikramb9291@gmail.com</span>
-              </a>
+            {/* Underneath Credentials & Availability Bar */}
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                gap: '0.65rem 1.25rem',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.82rem',
+                color: 'var(--text-secondary)',
+                padding: '0.85rem 1.15rem',
+                background: 'rgba(12, 16, 24, 0.75)',
+                border: '1px solid var(--border-subtle)',
+                borderRadius: '4px',
+                maxWidth: '640px',
+              }}
+            >
+              <span style={{ color: 'var(--text-high)' }}>IIT Madras BS DSA</span>
+              <span style={{ color: 'var(--border-subtle)' }}>&middot;</span>
+              <span style={{ color: 'var(--text-high)' }}>Matrusri CSE</span>
+              <span style={{ color: 'var(--border-subtle)' }}>&middot;</span>
+              <span>Hyderabad</span>
+              <span style={{ color: 'var(--border-subtle)' }}>&middot;</span>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', color: 'var(--signal-emerald)', fontWeight: 600 }}>
+                <span
+                  style={{
+                    width: '7px',
+                    height: '7px',
+                    borderRadius: '50%',
+                    backgroundColor: 'var(--signal-emerald)',
+                    boxShadow: '0 0 8px var(--signal-emerald)',
+                  }}
+                />
+                Open to opportunities
+              </span>
             </div>
           </div>
 
@@ -237,6 +274,7 @@ export default function HeroSection() {
                   <span>MODE:</span>
                   <button
                     onClick={() => setPhotoMode(photoMode === 'editorial' ? 'raw' : 'editorial')}
+                    aria-label={`Toggle photo mode between art-directed signal portrait and raw original. Current mode is ${photoMode}`}
                     style={{
                       background: 'rgba(255, 255, 255, 0.05)',
                       border: '1px solid var(--border-subtle)',

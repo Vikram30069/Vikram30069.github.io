@@ -283,6 +283,7 @@ export default function SignalCanvas3D({ currentSection = 0 }) {
           }}
           className="text-[#00f0ff] hover:underline cursor-pointer bg-white/5 px-2 py-0.5 rounded border border-[#00f0ff]/30"
           title="Toggle signal tensor simulation mode"
+          aria-label={`Toggle 3D signal tensor simulation mode. Current mode is ${mode}`}
         >
           MODE: [{mode}]
         </button>

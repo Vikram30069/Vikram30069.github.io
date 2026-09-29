@@ -59,15 +59,20 @@ export default function App() {
 
   return (
     <div style={{ position: 'relative', width: '100%', minHeight: '100vh', backgroundColor: 'var(--bg-canvas)' }}>
+      {/* Skip to Main Content Link for Keyboard & Screen Reader Accessibility */}
+      <a href="#main-content" className="skip-to-content">
+        Skip to main content
+      </a>
+
       {/* Background Matrix & Subtle Gradient Mesh */}
-      <div className="matrix-grid-bg" />
-      <div className="ambient-vignette" />
+      <div className="matrix-grid-bg" aria-hidden="true" />
+      <div className="ambient-vignette" aria-hidden="true" />
 
       {/* Persistent Navigation & Telemetry */}
       <Navigation activeSection={activeSection} />
 
       {/* Full-Viewport Story Panels in Sequence */}
-      <main>
+      <main id="main-content">
         <HeroSection />
         <AboutSection />
         <SelectedWorkSection />

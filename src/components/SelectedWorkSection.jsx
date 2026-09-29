@@ -268,6 +268,8 @@ export default function SelectedWorkSection() {
                         [sig.key]: !prev[sig.key],
                       }))
                     }
+                    aria-pressed={!!datadrishtiSignals[sig.key]}
+                    aria-label={`Toggle ${sig.label} risk signal weight ${sig.weight}`}
                     style={{
                       background: datadrishtiSignals[sig.key] ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.015)',
                       border: datadrishtiSignals[sig.key]
@@ -481,6 +483,8 @@ export default function SelectedWorkSection() {
                   <button
                     key={agent.id}
                     onClick={() => setSelectedAgent(agent.id)}
+                    aria-pressed={selectedAgent === agent.id}
+                    aria-label={`Select agent: ${agent.title} (${agent.model})`}
                     style={{
                       background: selectedAgent === agent.id ? 'rgba(0, 240, 255, 0.1)' : 'rgba(255,255,255,0.02)',
                       border: selectedAgent === agent.id ? '1px solid var(--signal-cyan)' : '1px solid var(--border-subtle)',
@@ -728,6 +732,8 @@ export default function SelectedWorkSection() {
                 <div style={{ display: 'flex', gap: '0.75rem' }}>
                   <button
                     onClick={() => setInGeofence(true)}
+                    aria-pressed={inGeofence}
+                    aria-label="Test verified in-bounds geofence coordinate"
                     style={{
                       flex: 1,
                       background: inGeofence ? 'var(--signal-emerald-dim)' : 'rgba(255,255,255,0.02)',
@@ -745,6 +751,8 @@ export default function SelectedWorkSection() {
 
                   <button
                     onClick={() => setInGeofence(false)}
+                    aria-pressed={!inGeofence}
+                    aria-label="Test spoof anomaly out-of-bounds coordinate"
                     style={{
                       flex: 1,
                       background: !inGeofence ? 'var(--alert-red-dim)' : 'rgba(255,255,255,0.02)',
@@ -916,6 +924,8 @@ export default function SelectedWorkSection() {
                 <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.25rem' }}>
                   <button
                     onClick={() => setChitranView('baseline')}
+                    aria-pressed={chitranView === 'baseline'}
+                    aria-label="View pre-deployment baseline metrics (2022)"
                     style={{
                       flex: 1,
                       background: chitranView === 'baseline' ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.02)',
@@ -932,6 +942,8 @@ export default function SelectedWorkSection() {
                   </button>
                   <button
                     onClick={() => setChitranView('production')}
+                    aria-pressed={chitranView === 'production'}
+                    aria-label="View shipped production live metrics"
                     style={{
                       flex: 1,
                       background: chitranView === 'production' ? 'var(--signal-emerald-dim)' : 'rgba(255,255,255,0.02)',
@@ -1052,6 +1064,8 @@ export default function SelectedWorkSection() {
               <div style={{ display: 'flex', gap: '0.5rem' }}>
                 <button
                   onClick={() => setChitranTab('dance')}
+                  aria-pressed={chitranTab === 'dance'}
+                  aria-label="Show Chitran Hero & WhatsApp funnel website capture"
                   style={{
                     background: chitranTab === 'dance' ? 'var(--signal-emerald)' : 'rgba(255,255,255,0.03)',
                     color: chitranTab === 'dance' ? '#000' : 'var(--text-secondary)',
@@ -1069,6 +1083,8 @@ export default function SelectedWorkSection() {
                 </button>
                 <button
                   onClick={() => setChitranTab('curriculum')}
+                  aria-pressed={chitranTab === 'curriculum'}
+                  aria-label="Show Chitran 4-Academy petal UI website capture"
                   style={{
                     background: chitranTab === 'curriculum' ? 'var(--signal-emerald)' : 'rgba(255,255,255,0.03)',
                     color: chitranTab === 'curriculum' ? '#000' : 'var(--text-secondary)',
