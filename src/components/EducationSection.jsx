@@ -1,7 +1,9 @@
-import React from 'react';
-import { GraduationCap, Award, ShieldCheck, CheckCircle2, BookmarkCheck, FileCheck } from 'lucide-react';
+import React, { useState } from 'react';
+import { GraduationCap, Award, ShieldCheck, CheckCircle2, BookmarkCheck, FileCheck, Eye } from 'lucide-react';
+import sound from '../utils/soundEffects';
 
 export default function EducationSection() {
+  const [showMural, setShowMural] = useState(false);
   const credentials = [
     {
       degree: 'B.Sc. in Data Science and Applications',
@@ -268,21 +270,90 @@ export default function EducationSection() {
             </h3>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              {honors.map((hon, hIdx) => (
-                <div key={hIdx} style={{ borderBottom: hIdx === 0 ? '1px solid var(--border-subtle)' : 'none', paddingBottom: hIdx === 0 ? '1rem' : 0 }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.25rem' }}>
-                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-high)' }}>
-                      {hon.title}
+              {honors.map((hon, hIdx) => {
+                const isArt = hon.title.includes('Fine Arts');
+                return (
+                  <div key={hIdx} style={{ borderBottom: hIdx < honors.length - 1 ? '1px solid var(--border-subtle)' : 'none', paddingBottom: hIdx < honors.length - 1 ? '1rem' : 0 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.25rem' }}>
+                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-high)' }}>
+                        {hon.title}
+                      </div>
+                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--signal-cyan)' }}>
+                        {hon.years}
+                      </span>
                     </div>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--signal-cyan)' }}>
-                      {hon.years}
-                    </span>
+                    <div style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: isArt ? '0.6rem' : 0 }}>
+                      {hon.details}
+                    </div>
+
+                    {isArt && (
+                      <div style={{ marginTop: '0.5rem' }}>
+                        <button
+                          onClick={() => {
+                            sound.playClick();
+                            setShowMural((prev) => !prev);
+                          }}
+                          onMouseEnter={() => sound.playHover()}
+                          aria-expanded={showMural}
+                          aria-label="Toggle Salvador Dali mural artwork preview"
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.4rem',
+                            background: showMural ? 'var(--signal-amber-dim)' : 'rgba(255,255,255,0.03)',
+                            border: showMural ? '1px solid var(--signal-amber)' : '1px solid var(--border-subtle)',
+                            color: showMural ? 'var(--signal-amber)' : 'var(--text-muted)',
+                            fontFamily: 'var(--font-mono)',
+                            fontSize: '0.7rem',
+                            padding: '0.3rem 0.6rem',
+                            borderRadius: '2px',
+                            cursor: 'pointer',
+                            transition: 'all 0.15s ease',
+                          }}
+                        >
+                          <Eye size={12} />
+                          <span>{showMural ? 'HIDE ARTWORK PREVIEW' : 'VIEW SALVADOR DALI MURAL [PHOTO]'}</span>
+                        </button>
+
+                        {showMural && (
+                          <div
+                            style={{
+                              marginTop: '0.75rem',
+                              borderRadius: '3px',
+                              overflow: 'hidden',
+                              border: '1px solid rgba(245, 158, 11, 0.4)',
+                              background: '#04060a',
+                              boxShadow: '0 8px 24px rgba(0,0,0,0.6)',
+                            }}
+                          >
+                            <img
+                              src="/assets/vikram_dali_mural.png"
+                              alt="Award-winning Salvador Dali fine arts mural by Vikram Banerjee"
+                              style={{ width: '100%', height: 'auto', display: 'block', maxHeight: '220px', objectFit: 'cover' }}
+                              loading="lazy"
+                            />
+                            <div
+                              style={{
+                                padding: '0.5rem 0.75rem',
+                                background: 'rgba(10, 14, 22, 0.9)',
+                                fontFamily: 'var(--font-mono)',
+                                fontSize: '0.68rem',
+                                color: 'var(--text-secondary)',
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                              }}
+                            >
+                              <span style={{ color: 'var(--signal-amber)' }}>1ST PLACE NATIONAL EXHIBITION // PONDICHERRY</span>
+                              <span style={{ color: 'var(--text-muted)' }}>Original Composition by Vikram</span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
-                  <div style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                    {hon.details}
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>

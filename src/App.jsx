@@ -8,6 +8,8 @@ import CapabilitiesSection from './components/CapabilitiesSection';
 import ExperienceSection from './components/ExperienceSection';
 import EducationSection from './components/EducationSection';
 import ContactSection from './components/ContactSection';
+import KineticMarquee from './components/KineticMarquee';
+import FloatingDock from './components/FloatingDock';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('hero');
@@ -74,6 +76,7 @@ export default function App() {
       {/* Full-Viewport Story Panels in Sequence */}
       <main id="main-content">
         <HeroSection />
+        <KineticMarquee speed={28} />
         <AboutSection />
         <SelectedWorkSection />
         <CapabilitiesSection />
@@ -81,6 +84,9 @@ export default function App() {
         <EducationSection />
         <ContactSection />
       </main>
+
+      {/* Floating Bottom Quick Dock with Audio Controller (Inspired by nikolaradeski.com) */}
+      <FloatingDock activeSection={activeSection} />
     </div>
   );
 }

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Code2, BrainCircuit, Server, Globe2, Network, BarChart3, Terminal, Cpu } from 'lucide-react';
+import InteractiveTerminal from './InteractiveTerminal';
+import { sound } from '../utils/soundEffects';
 
 export default function CapabilitiesSection() {
   const [activeGroup, setActiveGroup] = useState(null);
@@ -118,6 +120,9 @@ export default function CapabilitiesSection() {
           </p>
         </div>
 
+        {/* Live Interactive Command Center (Typing Simulator) */}
+        <InteractiveTerminal />
+
         {/* 6 Architectural Matrices */}
         <div
           style={{
@@ -130,6 +135,7 @@ export default function CapabilitiesSection() {
             <div
               key={group.id}
               className="signal-card"
+              onMouseEnter={() => sound.playHover()}
               style={{
                 padding: '1.75rem',
                 display: 'flex',

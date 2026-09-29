@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import { ShieldAlert, Users, Camera, ExternalLink, Activity, AlertTriangle, Check, Layers, Sparkles, MapPin, Radio, Zap } from 'lucide-react';
 import { GithubIcon } from './Icons';
+import sound from '../utils/soundEffects';
 
 export default function SelectedWorkSection() {
+  // View states for high-res UI mockups vs interactive simulators
+  const [datadrishtiView, setDatadrishtiView] = useState('simulator'); // 'simulator' | 'mockup'
+  const [rescuenetView, setRescuenetView] = useState('graph'); // 'graph' | 'mockup'
+  const [nodinView, setNodinView] = useState('radar'); // 'radar' | 'mockup'
+
   // Datadrishti Interactive Simulator State
   const [datadrishtiSignals, setDatadrishtiSignals] = useState({
     amountAnomaly: true,      // +30
@@ -223,13 +229,16 @@ export default function SelectedWorkSection() {
               </div>
             </div>
 
-            {/* Interactive Live Risk Engine Simulator */}
+            {/* Interactive Live Risk Engine Simulator / High-Res Dashboard Mockup */}
             <div
               style={{
                 background: 'rgba(0, 0, 0, 0.45)',
                 border: '1px solid var(--border-subtle)',
                 borderRadius: '4px',
-                padding: '1.5rem',
+                padding: '1.25rem',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
               }}
             >
               <div
@@ -244,84 +253,190 @@ export default function SelectedWorkSection() {
                   fontSize: '0.78rem',
                 }}
               >
-                <span style={{ color: 'var(--text-high)' }}>LIVE RISK ENGINE SIMULATOR</span>
+                <div style={{ display: 'flex', gap: '0.4rem', background: 'rgba(255,255,255,0.03)', padding: '2px', borderRadius: '3px' }}>
+                  <button
+                    onClick={() => {
+                      sound.playClick();
+                      setDatadrishtiView('simulator');
+                    }}
+                    onMouseEnter={() => sound.playHover()}
+                    aria-pressed={datadrishtiView === 'simulator'}
+                    aria-label="View interactive risk engine simulator"
+                    style={{
+                      background: datadrishtiView === 'simulator' ? 'var(--signal-cyan)' : 'transparent',
+                      color: datadrishtiView === 'simulator' ? '#000' : 'var(--text-muted)',
+                      border: 'none',
+                      borderRadius: '2px',
+                      padding: '0.25rem 0.6rem',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.7rem',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      transition: 'all 0.15s ease',
+                    }}
+                  >
+                    01. RISK SIMULATOR
+                  </button>
+                  <button
+                    onClick={() => {
+                      sound.playClick();
+                      setDatadrishtiView('mockup');
+                    }}
+                    onMouseEnter={() => sound.playHover()}
+                    aria-pressed={datadrishtiView === 'mockup'}
+                    aria-label="View high-resolution production UI mockup"
+                    style={{
+                      background: datadrishtiView === 'mockup' ? 'var(--signal-cyan)' : 'transparent',
+                      color: datadrishtiView === 'mockup' ? '#000' : 'var(--text-muted)',
+                      border: 'none',
+                      borderRadius: '2px',
+                      padding: '0.25rem 0.6rem',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.7rem',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      transition: 'all 0.15s ease',
+                    }}
+                  >
+                    02. PRODUCTION UI MOCKUP
+                  </button>
+                </div>
                 <span style={{ color: policy.color, fontWeight: 700 }}>
-                  SCORE: {riskScore} / 100
+                  {datadrishtiView === 'simulator' ? `SCORE: ${riskScore} / 100` : 'TELEMETRY: LIVE'}
                 </span>
               </div>
 
-              {/* 6 Calibrated Risk Signals Toggle Checklist */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem', marginBottom: '1.25rem' }}>
-                {[
-                  { key: 'amountAnomaly', label: 'Amount Anomaly', weight: '+30' },
-                  { key: 'recipientNovelty', label: 'Recipient Novelty', weight: '+20' },
-                  { key: 'deviceNovelty', label: 'Device Novelty', weight: '+20' },
-                  { key: 'timeAnomaly', label: 'Time Anomaly', weight: '+15' },
-                  { key: 'geoAnomaly', label: 'Geo Anomaly', weight: '+10' },
-                  { key: 'velocitySurges', label: 'Velocity Surges', weight: '+5' },
-                ].map((sig) => (
-                  <button
-                    key={sig.key}
-                    onClick={() =>
-                      setDatadrishtiSignals((prev) => ({
-                        ...prev,
-                        [sig.key]: !prev[sig.key],
-                      }))
-                    }
-                    aria-pressed={!!datadrishtiSignals[sig.key]}
-                    aria-label={`Toggle ${sig.label} risk signal weight ${sig.weight}`}
+              {datadrishtiView === 'simulator' ? (
+                <>
+                  {/* 6 Calibrated Risk Signals Toggle Checklist */}
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem', marginBottom: '1.25rem' }}>
+                    {[
+                      { key: 'amountAnomaly', label: 'Amount Anomaly', weight: '+30' },
+                      { key: 'recipientNovelty', label: 'Recipient Novelty', weight: '+20' },
+                      { key: 'deviceNovelty', label: 'Device Novelty', weight: '+20' },
+                      { key: 'timeAnomaly', label: 'Time Anomaly', weight: '+15' },
+                      { key: 'geoAnomaly', label: 'Geo Anomaly', weight: '+10' },
+                      { key: 'velocitySurges', label: 'Velocity Surges', weight: '+5' },
+                    ].map((sig) => (
+                      <button
+                        key={sig.key}
+                        onClick={() => {
+                          sound.playType();
+                          setDatadrishtiSignals((prev) => ({
+                            ...prev,
+                            [sig.key]: !prev[sig.key],
+                          }));
+                        }}
+                        onMouseEnter={() => sound.playHover()}
+                        aria-pressed={!!datadrishtiSignals[sig.key]}
+                        aria-label={`Toggle ${sig.label} risk signal weight ${sig.weight}`}
+                        style={{
+                          background: datadrishtiSignals[sig.key] ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.015)',
+                          border: datadrishtiSignals[sig.key]
+                            ? '1px solid rgba(0, 240, 255, 0.4)'
+                            : '1px solid var(--border-subtle)',
+                          padding: '0.5rem 0.6rem',
+                          borderRadius: '2px',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '0.72rem',
+                          color: datadrishtiSignals[sig.key] ? 'var(--text-high)' : 'var(--text-muted)',
+                          textAlign: 'left',
+                          transition: 'all 0.15s ease',
+                        }}
+                      >
+                        <span>{sig.label}</span>
+                        <span style={{ color: datadrishtiSignals[sig.key] ? 'var(--signal-cyan)' : 'var(--text-subtle)', fontWeight: 600 }}>
+                          {sig.weight}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Dynamic Friction Policy Output */}
+                  <div
                     style={{
-                      background: datadrishtiSignals[sig.key] ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.015)',
-                      border: datadrishtiSignals[sig.key]
-                        ? '1px solid rgba(0, 240, 255, 0.4)'
-                        : '1px solid var(--border-subtle)',
-                      padding: '0.5rem 0.6rem',
-                      borderRadius: '2px',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.72rem',
-                      color: datadrishtiSignals[sig.key] ? 'var(--text-high)' : 'var(--text-muted)',
-                      textAlign: 'left',
+                      background: 'rgba(10, 12, 18, 0.95)',
+                      border: `1px solid ${policy.color}`,
+                      padding: '1rem',
+                      borderRadius: '3px',
                     }}
                   >
-                    <span>{sig.label}</span>
-                    <span style={{ color: datadrishtiSignals[sig.key] ? 'var(--signal-cyan)' : 'var(--text-subtle)', fontWeight: 600 }}>
-                      {sig.weight}
-                    </span>
-                  </button>
-                ))}
-              </div>
-
-              {/* Dynamic Friction Policy Output */}
-              <div
-                style={{
-                  background: 'rgba(10, 12, 18, 0.95)',
-                  border: `1px solid ${policy.color}`,
-                  padding: '1rem',
-                  borderRadius: '3px',
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem' }}>
-                  <span
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem' }}>
+                      <span
+                        style={{
+                          width: '8px',
+                          height: '8px',
+                          borderRadius: '50%',
+                          backgroundColor: policy.color,
+                          boxShadow: `0 0 10px ${policy.color}`,
+                        }}
+                      />
+                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.82rem', fontWeight: 700, color: policy.color }}>
+                        {policy.label}
+                      </span>
+                    </div>
+                    <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)', lineHeight: 1.4 }}>
+                      {policy.action}
+                    </p>
+                  </div>
+                </>
+              ) : (
+                /* High-Res Production UI Mockup */
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                  <div
                     style={{
-                      width: '8px',
-                      height: '8px',
-                      borderRadius: '50%',
-                      backgroundColor: policy.color,
-                      boxShadow: `0 0 10px ${policy.color}`,
+                      position: 'relative',
+                      borderRadius: '4px',
+                      overflow: 'hidden',
+                      border: '1px solid var(--border-subtle)',
+                      background: '#04060a',
+                      boxShadow: '0 8px 30px rgba(0,0,0,0.7)',
                     }}
-                  />
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.82rem', fontWeight: 700, color: policy.color }}>
-                    {policy.label}
-                  </span>
+                  >
+                    <img
+                      src="/assets/datadrishti_dashboard_ui.jpg"
+                      alt="Datadrishti IntentGuard Production Dashboard Mockup"
+                      style={{ width: '100%', height: 'auto', display: 'block', maxHeight: '250px', objectFit: 'cover' }}
+                      loading="lazy"
+                    />
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '8px',
+                        left: '8px',
+                        background: 'rgba(0,0,0,0.85)',
+                        backdropFilter: 'blur(4px)',
+                        padding: '3px 8px',
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.66rem',
+                        color: 'var(--signal-cyan)',
+                        borderRadius: '2px',
+                        border: '1px solid rgba(0, 240, 255, 0.4)',
+                      }}
+                    >
+                      PAYTM INTENTGUARD // UPI RISK RADAR
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.72rem',
+                      color: 'var(--text-secondary)',
+                      lineHeight: 1.5,
+                      background: 'rgba(10, 14, 22, 0.7)',
+                      padding: '0.65rem 0.85rem',
+                      borderRadius: '3px',
+                      border: '1px solid var(--border-subtle)',
+                    }}
+                  >
+                    Production view showing real-time UPI stress anomaly scores, personal baseline Median Absolute Deviation (MAD) bounds, and adaptive friction intercept modal.
+                  </div>
                 </div>
-                <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)', lineHeight: 1.4 }}>
-                  {policy.action}
-                </p>
-              </div>
+              )}
             </div>
           </div>
 
@@ -454,13 +569,16 @@ export default function SelectedWorkSection() {
               </ul>
             </div>
 
-            {/* Interactive 10-Agent CrewAI Context Chaining Visualizer */}
+            {/* Interactive 10-Agent CrewAI Context Chaining Visualizer / Disaster Ops UI Mockup */}
             <div
               style={{
                 background: 'rgba(0, 0, 0, 0.45)',
                 border: '1px solid var(--border-subtle)',
                 borderRadius: '4px',
-                padding: '1.5rem',
+                padding: '1.25rem',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
               }}
             >
               <div
@@ -471,72 +589,184 @@ export default function SelectedWorkSection() {
                   marginBottom: '1rem',
                   display: 'flex',
                   justifyContent: 'space-between',
+                  alignItems: 'center',
+                  borderBottom: '1px solid var(--border-subtle)',
+                  paddingBottom: '0.75rem',
                 }}
               >
-                <span>CREWAI CONTEXT CHAINING</span>
-                <span style={{ color: 'var(--signal-cyan)' }}>10 AGENT GRAPH</span>
-              </div>
-
-              {/* Agent Nodes */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '1.25rem' }}>
-                {agents.map((agent) => (
+                <div style={{ display: 'flex', gap: '0.4rem', background: 'rgba(255,255,255,0.03)', padding: '2px', borderRadius: '3px' }}>
                   <button
-                    key={agent.id}
-                    onClick={() => setSelectedAgent(agent.id)}
-                    aria-pressed={selectedAgent === agent.id}
-                    aria-label={`Select agent: ${agent.title} (${agent.model})`}
+                    onClick={() => {
+                      sound.playClick();
+                      setRescuenetView('graph');
+                    }}
+                    onMouseEnter={() => sound.playHover()}
+                    aria-pressed={rescuenetView === 'graph'}
+                    aria-label="View 10-agent context chaining graph"
                     style={{
-                      background: selectedAgent === agent.id ? 'rgba(0, 240, 255, 0.1)' : 'rgba(255,255,255,0.02)',
-                      border: selectedAgent === agent.id ? '1px solid var(--signal-cyan)' : '1px solid var(--border-subtle)',
-                      padding: '0.6rem 0.8rem',
-                      borderRadius: '3px',
-                      textAlign: 'left',
+                      background: rescuenetView === 'graph' ? 'var(--signal-cyan)' : 'transparent',
+                      color: rescuenetView === 'graph' ? '#000' : 'var(--text-muted)',
+                      border: 'none',
+                      borderRadius: '2px',
+                      padding: '0.25rem 0.6rem',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.7rem',
+                      fontWeight: 600,
                       cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
                       transition: 'all 0.15s ease',
                     }}
                   >
-                    <div>
-                      <div style={{ fontFamily: 'var(--font-display)', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-high)' }}>
-                        {agent.title}
-                      </div>
-                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--text-muted)' }}>
-                        Provider: {agent.model}
-                      </div>
-                    </div>
-                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--signal-cyan)' }}>
-                      CHAIN &gt;
-                    </div>
+                    01. 10-AGENT GRAPH
                   </button>
-                ))}
-              </div>
-
-              {/* Selected Agent Inspector */}
-              {(() => {
-                const cur = agents.find((a) => a.id === selectedAgent);
-                return (
-                  <div
+                  <button
+                    onClick={() => {
+                      sound.playClick();
+                      setRescuenetView('mockup');
+                    }}
+                    onMouseEnter={() => sound.playHover()}
+                    aria-pressed={rescuenetView === 'mockup'}
+                    aria-label="View high-resolution disaster operations mockup"
                     style={{
-                      background: 'rgba(10, 14, 22, 0.95)',
-                      border: '1px solid rgba(0, 240, 255, 0.25)',
-                      padding: '0.9rem',
-                      borderRadius: '3px',
+                      background: rescuenetView === 'mockup' ? 'var(--signal-cyan)' : 'transparent',
+                      color: rescuenetView === 'mockup' ? '#000' : 'var(--text-muted)',
+                      border: 'none',
+                      borderRadius: '2px',
+                      padding: '0.25rem 0.6rem',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.7rem',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      transition: 'all 0.15s ease',
                     }}
                   >
-                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--signal-cyan)', marginBottom: '0.3rem' }}>
-                      TASK SPECIFICATION // {cur.title.toUpperCase()}
-                    </div>
-                    <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '0.5rem' }}>
-                      {cur.role}
-                    </div>
-                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--text-muted)' }}>
-                      Outputs context to: <strong style={{ color: '#fff' }}>{cur.chainTo}</strong>
+                    02. DISASTER OPS MOCKUP
+                  </button>
+                </div>
+                <span style={{ color: 'var(--signal-cyan)', fontWeight: 600 }}>
+                  {rescuenetView === 'graph' ? 'CREWAI CONTEXT' : 'OPS DASHBOARD'}
+                </span>
+              </div>
+
+              {rescuenetView === 'graph' ? (
+                <>
+                  {/* Agent Nodes */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '1.25rem' }}>
+                    {agents.map((agent) => (
+                      <button
+                        key={agent.id}
+                        onClick={() => {
+                          sound.playClick();
+                          setSelectedAgent(agent.id);
+                        }}
+                        onMouseEnter={() => sound.playHover()}
+                        aria-pressed={selectedAgent === agent.id}
+                        aria-label={`Select agent: ${agent.title} (${agent.model})`}
+                        style={{
+                          background: selectedAgent === agent.id ? 'rgba(0, 240, 255, 0.1)' : 'rgba(255,255,255,0.02)',
+                          border: selectedAgent === agent.id ? '1px solid var(--signal-cyan)' : '1px solid var(--border-subtle)',
+                          padding: '0.6rem 0.8rem',
+                          borderRadius: '3px',
+                          textAlign: 'left',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          transition: 'all 0.15s ease',
+                        }}
+                      >
+                        <div>
+                          <div style={{ fontFamily: 'var(--font-display)', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-high)' }}>
+                            {agent.title}
+                          </div>
+                          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--text-muted)' }}>
+                            Provider: {agent.model}
+                          </div>
+                        </div>
+                        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--signal-cyan)' }}>
+                          CHAIN &gt;
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Selected Agent Inspector */}
+                  {(() => {
+                    const cur = agents.find((a) => a.id === selectedAgent);
+                    return (
+                      <div
+                        style={{
+                          background: 'rgba(10, 14, 22, 0.95)',
+                          border: '1px solid rgba(0, 240, 255, 0.25)',
+                          padding: '0.9rem',
+                          borderRadius: '3px',
+                        }}
+                      >
+                        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--signal-cyan)', marginBottom: '0.3rem' }}>
+                          TASK SPECIFICATION // {cur.title.toUpperCase()}
+                        </div>
+                        <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '0.5rem' }}>
+                          {cur.role}
+                        </div>
+                        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--text-muted)' }}>
+                          Outputs context to: <strong style={{ color: '#fff' }}>{cur.chainTo}</strong>
+                        </div>
+                      </div>
+                    );
+                  })()}
+                </>
+              ) : (
+                /* High-Res Disaster Ops Mockup */
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                  <div
+                    style={{
+                      position: 'relative',
+                      borderRadius: '4px',
+                      overflow: 'hidden',
+                      border: '1px solid var(--border-subtle)',
+                      background: '#04060a',
+                      boxShadow: '0 8px 30px rgba(0,0,0,0.7)',
+                    }}
+                  >
+                    <img
+                      src="/assets/rescuenet_dashboard_ui.jpg"
+                      alt="RescueNet AI Disaster Response Command Center Mockup"
+                      style={{ width: '100%', height: 'auto', display: 'block', maxHeight: '250px', objectFit: 'cover' }}
+                      loading="lazy"
+                    />
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '8px',
+                        left: '8px',
+                        background: 'rgba(0,0,0,0.85)',
+                        backdropFilter: 'blur(4px)',
+                        padding: '3px 8px',
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.66rem',
+                        color: 'var(--signal-cyan)',
+                        borderRadius: '2px',
+                        border: '1px solid rgba(0, 240, 255, 0.4)',
+                      }}
+                    >
+                      TELANGANA DISASTER OPS // LIVE 10-AGENT ORCHESTRATION
                     </div>
                   </div>
-                );
-              })()}
+                  <div
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.72rem',
+                      color: 'var(--text-secondary)',
+                      lineHeight: 1.5,
+                      background: 'rgba(10, 14, 22, 0.7)',
+                      padding: '0.65rem 0.85rem',
+                      borderRadius: '3px',
+                      border: '1px solid var(--border-subtle)',
+                    }}
+                  >
+                    Emergency command center displaying real-time survivor triage status, GIS mapping of 148 Telangana facilities, bed availability vector matching, and automated Twilio voice call dispatches.
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -642,13 +872,13 @@ export default function SelectedWorkSection() {
               </div>
             </div>
 
-            {/* Interactive CV Matrix Transformation Visualizer */}
+            {/* Interactive CV Matrix Transformation Visualizer / High-Res CV Surveillance Mockup */}
             <div
               style={{
                 background: 'rgba(0,0,0,0.45)',
                 border: '1px solid var(--border-subtle)',
                 borderRadius: '4px',
-                padding: '1.5rem',
+                padding: '1.25rem',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
@@ -663,111 +893,229 @@ export default function SelectedWorkSection() {
                     fontSize: '0.76rem',
                     color: 'var(--text-muted)',
                     marginBottom: '1rem',
+                    alignItems: 'center',
+                    borderBottom: '1px solid var(--border-subtle)',
+                    paddingBottom: '0.75rem',
                   }}
                 >
-                  <span>LIVE MATRIX TRANSFORMATION &amp; GEOFENCE</span>
+                  <div style={{ display: 'flex', gap: '0.4rem', background: 'rgba(255,255,255,0.03)', padding: '2px', borderRadius: '3px' }}>
+                    <button
+                      onClick={() => {
+                        sound.playClick();
+                        setNodinView('radar');
+                      }}
+                      onMouseEnter={() => sound.playHover()}
+                      aria-pressed={nodinView === 'radar'}
+                      aria-label="View interactive geofence radar simulator"
+                      style={{
+                        background: nodinView === 'radar' ? 'var(--signal-cyan)' : 'transparent',
+                        color: nodinView === 'radar' ? '#000' : 'var(--text-muted)',
+                        border: 'none',
+                        borderRadius: '2px',
+                        padding: '0.25rem 0.6rem',
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.7rem',
+                        fontWeight: 600,
+                        cursor: 'pointer',
+                        transition: 'all 0.15s ease',
+                      }}
+                    >
+                      01. GEOFENCE RADAR
+                    </button>
+                    <button
+                      onClick={() => {
+                        sound.playClick();
+                        setNodinView('mockup');
+                      }}
+                      onMouseEnter={() => sound.playHover()}
+                      aria-pressed={nodinView === 'mockup'}
+                      aria-label="View high-resolution computer vision surveillance mockup"
+                      style={{
+                        background: nodinView === 'mockup' ? 'var(--signal-cyan)' : 'transparent',
+                        color: nodinView === 'mockup' ? '#000' : 'var(--text-muted)',
+                        border: 'none',
+                        borderRadius: '2px',
+                        padding: '0.25rem 0.6rem',
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.7rem',
+                        fontWeight: 600,
+                        cursor: 'pointer',
+                        transition: 'all 0.15s ease',
+                      }}
+                    >
+                      02. CV VISION MOCKUP
+                    </button>
+                  </div>
                   <span style={{ color: inGeofence ? 'var(--signal-emerald)' : 'var(--alert-red)' }}>
-                    {inGeofence ? 'GEOFENCE: VERIFIED' : 'GEOFENCE: BREACHED'}
+                    {nodinView === 'radar'
+                      ? inGeofence
+                        ? 'GEOFENCE: VERIFIED'
+                        : 'GEOFENCE: BREACHED'
+                      : 'CV STREAM: 12ms'}
                   </span>
                 </div>
 
-                {/* Spatial Grid representation */}
-                <div
-                  style={{
-                    position: 'relative',
-                    height: '160px',
-                    background: '#07090e',
-                    border: '1px solid var(--border-subtle)',
-                    borderRadius: '3px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginBottom: '1rem',
-                    overflow: 'hidden',
-                  }}
-                >
-                  {/* Grid Lines */}
-                  <div
-                    style={{
-                      position: 'absolute',
-                      inset: 0,
-                      backgroundImage: 'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)',
-                      backgroundSize: '20px 20px',
-                    }}
-                  />
+                {nodinView === 'radar' ? (
+                  <>
+                    {/* Spatial Grid representation */}
+                    <div
+                      style={{
+                        position: 'relative',
+                        height: '160px',
+                        background: '#07090e',
+                        border: '1px solid var(--border-subtle)',
+                        borderRadius: '3px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        marginBottom: '1rem',
+                        overflow: 'hidden',
+                      }}
+                    >
+                      {/* Grid Lines */}
+                      <div
+                        style={{
+                          position: 'absolute',
+                          inset: 0,
+                          backgroundImage: 'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)',
+                          backgroundSize: '20px 20px',
+                        }}
+                      />
 
-                  {/* Geofence Perimeter Box */}
-                  <div
-                    style={{
-                      width: '120px',
-                      height: '90px',
-                      border: `1.5px dashed ${inGeofence ? 'var(--signal-emerald)' : 'var(--alert-red)'}`,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.65rem',
-                      color: inGeofence ? 'var(--signal-emerald)' : 'var(--alert-red)',
-                      background: inGeofence ? 'rgba(16, 185, 129, 0.05)' : 'rgba(255, 51, 68, 0.05)',
-                    }}
-                  >
-                    AUTHORIZED PERIMETER
+                      {/* Geofence Perimeter Box */}
+                      <div
+                        style={{
+                          width: '120px',
+                          height: '90px',
+                          border: `1.5px dashed ${inGeofence ? 'var(--signal-emerald)' : 'var(--alert-red)'}`,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '0.65rem',
+                          color: inGeofence ? 'var(--signal-emerald)' : 'var(--alert-red)',
+                          background: inGeofence ? 'rgba(16, 185, 129, 0.05)' : 'rgba(255, 51, 68, 0.05)',
+                        }}
+                      >
+                        AUTHORIZED PERIMETER
+                      </div>
+
+                      {/* Face Tracking Reticle */}
+                      <div
+                        style={{
+                          position: 'absolute',
+                          width: '32px',
+                          height: '32px',
+                          border: '1.5px solid var(--signal-cyan)',
+                          borderRadius: '50%',
+                          transform: inGeofence ? 'translate(0, 0)' : 'translate(75px, -30px)',
+                          transition: 'transform 0.4s ease',
+                          boxShadow: '0 0 10px var(--signal-cyan-glow)',
+                        }}
+                      />
+                    </div>
+
+                    <div style={{ display: 'flex', gap: '0.75rem' }}>
+                      <button
+                        onClick={() => {
+                          sound.playChirp();
+                          setInGeofence(true);
+                        }}
+                        onMouseEnter={() => sound.playHover()}
+                        aria-pressed={inGeofence}
+                        aria-label="Test verified in-bounds geofence coordinate"
+                        style={{
+                          flex: 1,
+                          background: inGeofence ? 'var(--signal-emerald-dim)' : 'rgba(255,255,255,0.02)',
+                          border: inGeofence ? '1px solid var(--signal-emerald)' : '1px solid var(--border-subtle)',
+                          color: inGeofence ? 'var(--signal-emerald)' : 'var(--text-muted)',
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '0.72rem',
+                          padding: '0.45rem',
+                          borderRadius: '2px',
+                          cursor: 'pointer',
+                        }}
+                      >
+                        TEST IN-BOUNDS
+                      </button>
+
+                      <button
+                        onClick={() => {
+                          sound.playClick();
+                          setInGeofence(false);
+                        }}
+                        onMouseEnter={() => sound.playHover()}
+                        aria-pressed={!inGeofence}
+                        aria-label="Test spoof anomaly out-of-bounds coordinate"
+                        style={{
+                          flex: 1,
+                          background: !inGeofence ? 'var(--alert-red-dim)' : 'rgba(255,255,255,0.02)',
+                          border: !inGeofence ? '1px solid var(--alert-red)' : '1px solid var(--border-subtle)',
+                          color: !inGeofence ? 'var(--alert-red)' : 'var(--text-muted)',
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '0.72rem',
+                          padding: '0.45rem',
+                          borderRadius: '2px',
+                          cursor: 'pointer',
+                        }}
+                      >
+                        TEST SPOOF ANOMALY
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  /* High-Res Computer Vision Surveillance Mockup */
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                    <div
+                      style={{
+                        position: 'relative',
+                        borderRadius: '4px',
+                        overflow: 'hidden',
+                        border: '1px solid var(--border-subtle)',
+                        background: '#04060a',
+                        boxShadow: '0 8px 30px rgba(0,0,0,0.7)',
+                      }}
+                    >
+                      <img
+                        src="/assets/nodin_dashboard_ui.jpg"
+                        alt="NodIn Computer Vision Biometric Tracking and Geofence Mockup"
+                        style={{ width: '100%', height: 'auto', display: 'block', maxHeight: '250px', objectFit: 'cover' }}
+                        loading="lazy"
+                      />
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: '8px',
+                          left: '8px',
+                          background: 'rgba(0,0,0,0.85)',
+                          backdropFilter: 'blur(4px)',
+                          padding: '3px 8px',
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '0.66rem',
+                          color: 'var(--signal-cyan)',
+                          borderRadius: '2px',
+                          border: '1px solid rgba(0, 240, 255, 0.4)',
+                        }}
+                      >
+                        NODIN CV // FACIAL LANDMARK &amp; LIVENESS TELEMETRY
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.72rem',
+                        color: 'var(--text-secondary)',
+                        lineHeight: 1.5,
+                        background: 'rgba(10, 14, 22, 0.7)',
+                        padding: '0.65rem 0.85rem',
+                        borderRadius: '3px',
+                        border: '1px solid var(--border-subtle)',
+                      }}
+                    >
+                      Continuous biometric stream verification: facial landmark bounding boxes, 99.4% anti-spoof liveness graph, and strict GPS perimeter polygon lockdown.
+                    </div>
                   </div>
-
-                  {/* Face Tracking Reticle */}
-                  <div
-                    style={{
-                      position: 'absolute',
-                      width: '32px',
-                      height: '32px',
-                      border: '1.5px solid var(--signal-cyan)',
-                      borderRadius: '50%',
-                      transform: inGeofence ? 'translate(0, 0)' : 'translate(75px, -30px)',
-                      transition: 'transform 0.4s ease',
-                      boxShadow: '0 0 10px var(--signal-cyan-glow)',
-                    }}
-                  />
-                </div>
-
-                <div style={{ display: 'flex', gap: '0.75rem' }}>
-                  <button
-                    onClick={() => setInGeofence(true)}
-                    aria-pressed={inGeofence}
-                    aria-label="Test verified in-bounds geofence coordinate"
-                    style={{
-                      flex: 1,
-                      background: inGeofence ? 'var(--signal-emerald-dim)' : 'rgba(255,255,255,0.02)',
-                      border: inGeofence ? '1px solid var(--signal-emerald)' : '1px solid var(--border-subtle)',
-                      color: inGeofence ? 'var(--signal-emerald)' : 'var(--text-muted)',
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.72rem',
-                      padding: '0.45rem',
-                      borderRadius: '2px',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    TEST IN-BOUNDS
-                  </button>
-
-                  <button
-                    onClick={() => setInGeofence(false)}
-                    aria-pressed={!inGeofence}
-                    aria-label="Test spoof anomaly out-of-bounds coordinate"
-                    style={{
-                      flex: 1,
-                      background: !inGeofence ? 'var(--alert-red-dim)' : 'rgba(255,255,255,0.02)',
-                      border: !inGeofence ? '1px solid var(--alert-red)' : '1px solid var(--border-subtle)',
-                      color: !inGeofence ? 'var(--alert-red)' : 'var(--text-muted)',
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.72rem',
-                      padding: '0.45rem',
-                      borderRadius: '2px',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    TEST SPOOF ANOMALY
-                  </button>
-                </div>
+                )}
               </div>
 
               <div
@@ -923,7 +1271,11 @@ export default function SelectedWorkSection() {
                 {/* View Switch Buttons */}
                 <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.25rem' }}>
                   <button
-                    onClick={() => setChitranView('baseline')}
+                    onClick={() => {
+                      sound.playClick();
+                      setChitranView('baseline');
+                    }}
+                    onMouseEnter={() => sound.playHover()}
                     aria-pressed={chitranView === 'baseline'}
                     aria-label="View pre-deployment baseline metrics (2022)"
                     style={{
@@ -936,12 +1288,17 @@ export default function SelectedWorkSection() {
                       padding: '0.45rem',
                       borderRadius: '2px',
                       cursor: 'pointer',
+                      transition: 'all 0.15s ease',
                     }}
                   >
                     PRE-DEPLOYMENT [2022]
                   </button>
                   <button
-                    onClick={() => setChitranView('production')}
+                    onClick={() => {
+                      sound.playClick();
+                      setChitranView('production');
+                    }}
+                    onMouseEnter={() => sound.playHover()}
                     aria-pressed={chitranView === 'production'}
                     aria-label="View shipped production live metrics"
                     style={{
@@ -955,6 +1312,7 @@ export default function SelectedWorkSection() {
                       borderRadius: '2px',
                       cursor: 'pointer',
                       fontWeight: 600,
+                      transition: 'all 0.15s ease',
                     }}
                   >
                     SHIPPED CLIENT [LIVE]
@@ -1063,7 +1421,11 @@ export default function SelectedWorkSection() {
               {/* Toggle Switch between the 2 Website Captures */}
               <div style={{ display: 'flex', gap: '0.5rem' }}>
                 <button
-                  onClick={() => setChitranTab('dance')}
+                  onClick={() => {
+                    sound.playClick();
+                    setChitranTab('dance');
+                  }}
+                  onMouseEnter={() => sound.playHover()}
                   aria-pressed={chitranTab === 'dance'}
                   aria-label="Show Chitran Hero & WhatsApp funnel website capture"
                   style={{
@@ -1082,7 +1444,11 @@ export default function SelectedWorkSection() {
                   01. HERO &amp; WHATSAPP FUNNEL
                 </button>
                 <button
-                  onClick={() => setChitranTab('curriculum')}
+                  onClick={() => {
+                    sound.playClick();
+                    setChitranTab('curriculum');
+                  }}
+                  onMouseEnter={() => sound.playHover()}
                   aria-pressed={chitranTab === 'curriculum'}
                   aria-label="Show Chitran 4-Academy petal UI website capture"
                   style={{

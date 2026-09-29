@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Terminal, ShieldAlert, Cpu, Award, Mail, ExternalLink, Activity, Menu, X, Download } from 'lucide-react';
+import { Terminal, ShieldAlert, Cpu, Award, Mail, ExternalLink, Activity, Menu, X, Download, Volume2, VolumeX } from 'lucide-react';
+import { sound } from '../utils/soundEffects';
 
 export default function Navigation({ activeSection = 'hero' }) {
   const [currentTime, setCurrentTime] = useState('');
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [audioEnabled, setAudioEnabled] = useState(false);
+
+  useEffect(() => {
+    setAudioEnabled(sound.isEnabled());
+  }, []);
+
+  const handleToggleAudio = () => {
+    const nextState = sound.toggleSound();
+    setAudioEnabled(nextState);
+  };
 
   // Close mobile drawer on Escape key
   useEffect(() => {
@@ -55,6 +66,7 @@ export default function Navigation({ activeSection = 'hero' }) {
   ];
 
   const scrollTo = (id) => {
+    sound.playClick();
     setMobileMenuOpen(false);
     const element = document.getElementById(id);
     if (element) {
@@ -163,6 +175,7 @@ export default function Navigation({ activeSection = 'hero' }) {
                 gap: '0.45rem',
               }}
               onMouseEnter={(e) => {
+                sound.playHover();
                 if (activeSection !== item.id) {
                   e.currentTarget.style.color = 'var(--text-high)';
                   e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.12)';
@@ -184,6 +197,36 @@ export default function Navigation({ activeSection = 'hero' }) {
             </button>
           ))}
 
+          {/* Desktop Audio Synthesizer Toggle */}
+          <button
+            onClick={handleToggleAudio}
+            onMouseEnter={() => sound.playHover()}
+            className="btn-secondary"
+            style={{
+              padding: '0.38rem 0.75rem',
+              fontSize: '0.74rem',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.4rem',
+              marginLeft: '0.5rem',
+              color: audioEnabled ? 'var(--signal-emerald)' : 'var(--text-muted)',
+              borderColor: audioEnabled ? 'rgba(16, 185, 129, 0.4)' : 'var(--border-subtle)',
+              cursor: 'pointer',
+            }}
+            aria-label={audioEnabled ? "Mute interface sound effects" : "Enable interface sound effects"}
+            title={audioEnabled ? "Audio Effects: ACTIVE" : "Audio Effects: MUTED (Click to enable)"}
+          >
+            {audioEnabled ? <Volume2 size={13} /> : <VolumeX size={13} />}
+            {audioEnabled && (
+              <span style={{ display: 'inline-flex', gap: '2px', height: '10px', alignItems: 'center' }}>
+                <span style={{ width: '2px', height: '8px', background: 'var(--signal-emerald)', borderRadius: '1px' }} />
+                <span style={{ width: '2px', height: '10px', background: 'var(--signal-emerald)', borderRadius: '1px' }} />
+                <span style={{ width: '2px', height: '5px', background: 'var(--signal-emerald)', borderRadius: '1px' }} />
+              </span>
+            )}
+            <span>{audioEnabled ? 'SFX ON' : 'SFX'}</span>
+          </button>
+
           {/* Desktop Direct Resume Access */}
           <a
             href="/resume.html"
@@ -191,6 +234,8 @@ export default function Navigation({ activeSection = 'hero' }) {
             rel="noopener noreferrer"
             className="btn-secondary"
             aria-label="View or Download Vikram Banerjee Technical Resume"
+            onMouseEnter={() => sound.playHover()}
+            onClick={() => sound.playClick()}
             style={{
               padding: '0.38rem 0.85rem',
               fontSize: '0.74rem',
@@ -206,7 +251,22 @@ export default function Navigation({ activeSection = 'hero' }) {
         </nav>
 
         {/* Mobile Quick Action Bar */}
-        <div className="mobile-actions" style={{ display: 'none', alignItems: 'center', gap: '0.65rem' }}>
+        <div className="mobile-actions" style={{ display: 'none', alignItems: 'center', gap: '0.5rem' }}>
+          <button
+            onClick={handleToggleAudio}
+            className="btn-secondary"
+            aria-label={audioEnabled ? "Mute audio" : "Enable audio"}
+            style={{
+              padding: '0.45rem 0.65rem',
+              fontSize: '0.74rem',
+              display: 'inline-flex',
+              alignItems: 'center',
+              color: audioEnabled ? 'var(--signal-emerald)' : 'var(--text-muted)',
+            }}
+          >
+            {audioEnabled ? <Volume2 size={14} /> : <VolumeX size={14} />}
+          </button>
+
           <a
             href="/resume.html"
             target="_blank"

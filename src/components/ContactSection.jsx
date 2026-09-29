@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, Phone, Copy, Check, Send, Radio, MapPin, Terminal } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
+import sound from '../utils/soundEffects';
 
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
@@ -13,6 +14,7 @@ export default function ContactSection() {
   const phone = '+91 6304589007';
 
   const copyToClipboard = () => {
+    sound.playSuccess();
     navigator.clipboard.writeText(email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2400);
@@ -20,6 +22,7 @@ export default function ContactSection() {
 
   const handleTransmit = (e) => {
     e.preventDefault();
+    sound.playSuccess();
     const subject = encodeURIComponent(`[Transmission] ${messageIntent} — ${senderName || 'Team'}`);
     const body = encodeURIComponent(
       `Hello Vikram,\n\nSender: ${senderName || 'Anonymous'}\nRole/Context: ${senderRole}\nObjective: ${messageIntent}\n\nMessage:\n${customNote || 'I reviewed your portfolio and would like to discuss technical opportunities and systems work.'}\n\nSent via Signal Transmission Console`
@@ -89,6 +92,8 @@ export default function ContactSection() {
               <div style={{ display: 'flex', gap: '0.75rem' }}>
                 <a
                   href={`mailto:${email}`}
+                  onMouseEnter={() => sound.playHover()}
+                  onClick={() => sound.playClick()}
                   className="btn-signal"
                   style={{ flex: 1, justifyContent: 'center' }}
                 >
@@ -97,6 +102,7 @@ export default function ContactSection() {
                 </a>
                 <button
                   onClick={copyToClipboard}
+                  onMouseEnter={() => sound.playHover()}
                   className="btn-secondary"
                   style={{ padding: '0.8rem 1rem' }}
                   title="Copy email address"
@@ -226,6 +232,7 @@ export default function ContactSection() {
                   type="text"
                   value={senderName}
                   onChange={(e) => setSenderName(e.target.value)}
+                  onKeyDown={() => sound.playType()}
                   placeholder="e.g. Elena Rostova / Hiring Lead"
                   style={{
                     width: '100%',
@@ -252,7 +259,10 @@ export default function ContactSection() {
                 <select
                   id="contact-message-intent"
                   value={messageIntent}
-                  onChange={(e) => setMessageIntent(e.target.value)}
+                  onChange={(e) => {
+                    sound.playClick();
+                    setMessageIntent(e.target.value);
+                  }}
                   style={{
                     width: '100%',
                     background: 'rgba(10, 14, 22, 0.95)',
@@ -284,6 +294,7 @@ export default function ContactSection() {
                   id="contact-custom-note"
                   value={customNote}
                   onChange={(e) => setCustomNote(e.target.value)}
+                  onKeyDown={() => sound.playType()}
                   rows={4}
                   placeholder="Share details regarding the role, problem statement, or project scope..."
                   style={{
@@ -304,6 +315,7 @@ export default function ContactSection() {
               <button
                 type="submit"
                 className="btn-signal"
+                onMouseEnter={() => sound.playHover()}
                 style={{
                   width: '100%',
                   justifyContent: 'center',

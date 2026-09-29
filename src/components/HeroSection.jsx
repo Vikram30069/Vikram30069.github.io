@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Mail, ShieldAlert, Cpu, Terminal, ArrowUpRight, Radio, RefreshCw, Layers, Download } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 import SignalCanvas3D from './SignalCanvas3D';
+import TypewriterPrompt from './TypewriterPrompt';
+import { sound } from '../utils/soundEffects';
 
 /**
  * HeroSection
@@ -121,6 +123,9 @@ export default function HeroSection() {
               Computer Science and Data Science undergraduate building intelligent systems across multi-agent AI, fraud detection, computer vision and real-world operational platforms.
             </p>
 
+            {/* Live Telemetry Typewriter Console */}
+            <TypewriterPrompt />
+
             {/* Immediate Action Buttons (View Selected Work & Download Resume + Socials) */}
             <div
               style={{
@@ -135,6 +140,8 @@ export default function HeroSection() {
                 href="#projects"
                 className="btn-signal"
                 aria-label="View Selected Work and Flagship Projects"
+                onMouseEnter={() => sound.playHover()}
+                onClick={() => sound.playClick()}
               >
                 <Layers size={16} />
                 <span>View Selected Work</span>
@@ -146,6 +153,8 @@ export default function HeroSection() {
                 rel="noopener noreferrer"
                 className="btn-secondary"
                 aria-label="Download or View Vikram Banerjee Technical Resume"
+                onMouseEnter={() => sound.playHover()}
+                onClick={() => sound.playClick()}
               >
                 <Download size={16} />
                 <span>Download Resume</span>
@@ -157,6 +166,8 @@ export default function HeroSection() {
                 rel="noopener noreferrer"
                 className="btn-secondary"
                 aria-label="Visit Vikram Banerjee GitHub Repositories"
+                onMouseEnter={() => sound.playHover()}
+                onClick={() => sound.playClick()}
                 style={{ padding: '0.8rem 1rem' }}
                 title="GitHub Repositories"
               >
@@ -170,6 +181,8 @@ export default function HeroSection() {
                 rel="noopener noreferrer"
                 className="btn-secondary"
                 aria-label="Visit Vikram Banerjee LinkedIn Profile"
+                onMouseEnter={() => sound.playHover()}
+                onClick={() => sound.playClick()}
                 style={{ padding: '0.8rem 1rem' }}
                 title="LinkedIn Profile"
               >
@@ -273,7 +286,11 @@ export default function HeroSection() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <span>MODE:</span>
                   <button
-                    onClick={() => setPhotoMode(photoMode === 'editorial' ? 'raw' : 'editorial')}
+                    onClick={() => {
+                      sound.playChirp(600, 1200, 0.06);
+                      setPhotoMode(photoMode === 'editorial' ? 'raw' : 'editorial');
+                    }}
+                    onMouseEnter={() => sound.playHover()}
                     aria-label={`Toggle photo mode between art-directed signal portrait and raw original. Current mode is ${photoMode}`}
                     style={{
                       background: 'rgba(255, 255, 255, 0.05)',

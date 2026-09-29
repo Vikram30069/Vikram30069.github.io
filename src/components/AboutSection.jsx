@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Database, Binary, Activity, Layers, Compass, CheckCircle2 } from 'lucide-react';
+import sound from '../utils/soundEffects';
 
 export default function AboutSection() {
   const [activeTab, setActiveTab] = useState('engineering'); // 'engineering' | 'operations'
-  const [proofRecord, setProofRecord] = useState('paytm'); // 'paytm' | 'chitran'
+  const [proofRecord, setProofRecord] = useState('paytm'); // 'paytm' | 'chitran' | 'mural' | 'systems'
 
   return (
     <section id="about" className="story-panel" style={{ backgroundColor: 'var(--bg-canvas)' }}>
@@ -67,7 +68,11 @@ export default function AboutSection() {
               }}
             >
               <button
-                onClick={() => setActiveTab('engineering')}
+                onClick={() => {
+                  sound.playClick();
+                  setActiveTab('engineering');
+                }}
+                onMouseEnter={() => sound.playHover()}
                 aria-pressed={activeTab === 'engineering'}
                 aria-label="View technical architecture background"
                 style={{
@@ -86,7 +91,11 @@ export default function AboutSection() {
                 01. TECHNICAL ARCHITECTURE
               </button>
               <button
-                onClick={() => setActiveTab('operations')}
+                onClick={() => {
+                  sound.playClick();
+                  setActiveTab('operations');
+                }}
+                onMouseEnter={() => sound.playHover()}
                 aria-pressed={activeTab === 'operations'}
                 aria-label="View operations and civic impact background"
                 style={{
@@ -238,43 +247,38 @@ export default function AboutSection() {
                 }}
               >
                 <span>PROOF OF WORK // FIELD RECORD</span>
-                <div style={{ display: 'flex', gap: '0.35rem' }}>
-                  <button
-                    onClick={() => setProofRecord('paytm')}
-                    aria-pressed={proofRecord === 'paytm'}
-                    aria-label="View Paytm Hackathon field record and team recognition"
-                    style={{
-                      background: proofRecord === 'paytm' ? 'var(--signal-cyan)' : 'rgba(255,255,255,0.03)',
-                      color: proofRecord === 'paytm' ? '#000' : 'var(--text-muted)',
-                      border: proofRecord === 'paytm' ? '1px solid var(--signal-cyan)' : '1px solid var(--border-subtle)',
-                      padding: '0.2rem 0.5rem',
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.7rem',
-                      borderRadius: '2px',
-                      cursor: 'pointer',
-                      fontWeight: 600,
-                    }}
-                  >
-                    PAYTM HACKATHON
-                  </button>
-                  <button
-                    onClick={() => setProofRecord('chitran')}
-                    aria-pressed={proofRecord === 'chitran'}
-                    aria-label="View Chitran Institute web growth field record"
-                    style={{
-                      background: proofRecord === 'chitran' ? 'var(--signal-emerald)' : 'rgba(255,255,255,0.03)',
-                      color: proofRecord === 'chitran' ? '#000' : 'var(--text-muted)',
-                      border: proofRecord === 'chitran' ? '1px solid var(--signal-emerald)' : '1px solid var(--border-subtle)',
-                      padding: '0.2rem 0.5rem',
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.7rem',
-                      borderRadius: '2px',
-                      cursor: 'pointer',
-                      fontWeight: 600,
-                    }}
-                  >
-                    CHITRAN WEB
-                  </button>
+                <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap' }}>
+                  {[
+                    { id: 'paytm', label: 'PAYTM HACKATHON', color: 'var(--signal-cyan)' },
+                    { id: 'chitran', label: 'CHITRAN WEB', color: 'var(--signal-emerald)' },
+                    { id: 'mural', label: 'DALI MURAL', color: 'var(--signal-amber)' },
+                    { id: 'systems', label: 'SYSTEMS LAB', color: 'var(--signal-cyan)' },
+                  ].map((rec) => (
+                    <button
+                      key={rec.id}
+                      onClick={() => {
+                        sound.playClick();
+                        setProofRecord(rec.id);
+                      }}
+                      onMouseEnter={() => sound.playHover()}
+                      aria-pressed={proofRecord === rec.id}
+                      aria-label={`View ${rec.label} field record`}
+                      style={{
+                        background: proofRecord === rec.id ? rec.color : 'rgba(255,255,255,0.03)',
+                        color: proofRecord === rec.id ? '#000' : 'var(--text-muted)',
+                        border: proofRecord === rec.id ? `1px solid ${rec.color}` : '1px solid var(--border-subtle)',
+                        padding: '0.2rem 0.5rem',
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.68rem',
+                        borderRadius: '2px',
+                        cursor: 'pointer',
+                        fontWeight: 600,
+                        transition: 'all 0.15s ease',
+                      }}
+                    >
+                      {rec.label}
+                    </button>
+                  ))}
                 </div>
               </div>
 
@@ -295,12 +299,20 @@ export default function AboutSection() {
                   src={
                     proofRecord === 'paytm'
                       ? '/assets/vikram_paytm_hackathon.png'
-                      : '/assets/chitran_curriculum_ui.png'
+                      : proofRecord === 'chitran'
+                      ? '/assets/chitran_curriculum_ui.png'
+                      : proofRecord === 'mural'
+                      ? '/assets/vikram_dali_mural.png'
+                      : '/assets/vikram_pair_programming.png'
                   }
                   alt={
                     proofRecord === 'paytm'
                       ? 'Vikram Banerjee engineering Datadrishti at Paytm Hackathon'
-                      : 'Chitran Institute production website and curriculum portal'
+                      : proofRecord === 'chitran'
+                      ? 'Chitran Institute production website and curriculum portal'
+                      : proofRecord === 'mural'
+                      ? 'Salvador Dali Fine Arts mural award-winning composition by Vikram'
+                      : 'Vikram systems engineering and pair programming session'
                   }
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   loading="lazy"
@@ -310,17 +322,38 @@ export default function AboutSection() {
                     position: 'absolute',
                     top: '8px',
                     left: '8px',
-                    background: 'rgba(0,0,0,0.75)',
+                    background: 'rgba(0,0,0,0.85)',
                     backdropFilter: 'blur(4px)',
-                    padding: '2px 8px',
+                    padding: '3px 8px',
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '0.68rem',
-                    color: proofRecord === 'paytm' ? 'var(--signal-cyan)' : 'var(--signal-emerald)',
+                    fontSize: '0.66rem',
+                    color:
+                      proofRecord === 'paytm'
+                        ? 'var(--signal-cyan)'
+                        : proofRecord === 'chitran'
+                        ? 'var(--signal-emerald)'
+                        : proofRecord === 'mural'
+                        ? 'var(--signal-amber)'
+                        : 'var(--signal-cyan)',
                     borderRadius: '2px',
-                    border: `1px solid ${proofRecord === 'paytm' ? 'rgba(0, 240, 255, 0.3)' : 'rgba(16, 185, 129, 0.3)'}`,
+                    border: `1px solid ${
+                      proofRecord === 'paytm'
+                        ? 'rgba(0, 240, 255, 0.4)'
+                        : proofRecord === 'chitran'
+                        ? 'rgba(16, 185, 129, 0.4)'
+                        : proofRecord === 'mural'
+                        ? 'rgba(245, 158, 11, 0.4)'
+                        : 'rgba(0, 240, 255, 0.4)'
+                    }`,
                   }}
                 >
-                  {proofRecord === 'paytm' ? 'LIVE PROTOTYPING // DATADRISHTI' : 'SHIPPED CLIENT // CHITRAN.ORG'}
+                  {proofRecord === 'paytm'
+                    ? 'LIVE PROTOTYPING // DATADRISHTI'
+                    : proofRecord === 'chitran'
+                    ? 'SHIPPED CLIENT // CHITRAN.ORG'
+                    : proofRecord === 'mural'
+                    ? '1ST PLACE NATIONAL AWARD // SALVADOR DALI MURAL'
+                    : 'CODE ARCHITECTURE // SYSTEMS LAB'}
                 </div>
               </div>
             </div>
@@ -336,11 +369,21 @@ export default function AboutSection() {
               }}
             >
               <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.25rem' }}>
-                {proofRecord === 'paytm' ? 'Field Context (Paytm):' : 'Production Scope (Chitran):'}
+                {proofRecord === 'paytm'
+                  ? 'Field Context (Paytm):'
+                  : proofRecord === 'chitran'
+                  ? 'Production Scope (Chitran):'
+                  : proofRecord === 'mural'
+                  ? 'Artistic Discipline & Composition:'
+                  : 'Collaborative Engineering:'}
               </div>
               {proofRecord === 'paytm'
                 ? 'Vikram on-site during the intense development cycle of Datadrishti (Paytm IntentGuard) — testing real-time UPI stress anomaly models under tight compute budgets.'
-                : 'Directing full digital operations for Chitran Institute: custom web portal architecture, Google Business Profile API synchronization, and Rank Math SEO that drove +120% enrollment growth.'}
+                : proofRecord === 'chitran'
+                ? 'Directing full digital operations for Chitran Institute: custom web portal architecture, Google Business Profile API synchronization, and Rank Math SEO that drove +120% enrollment growth.'
+                : proofRecord === 'mural'
+                ? '1st Place Distinction at the National Level Fine Arts Exhibition (Pondicherry): Surrealist Salvador Dali composition illustrating disciplined attention to structural proportion, geometry, and visual excellence.'
+                : 'Collaborative systems engineering and algorithm prototyping: distributed compute, real-time telemetry indexing, and high-performance full-stack architectures.'}
             </div>
           </div>
         </div>
