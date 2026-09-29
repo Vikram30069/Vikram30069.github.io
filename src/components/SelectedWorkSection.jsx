@@ -101,6 +101,7 @@ export default function SelectedWorkSection() {
 
   // Chitran Institute Client Project Telemetry State
   const [chitranView, setChitranView] = useState('production'); // 'production' | 'baseline'
+  const [chitranTab, setChitranTab] = useState('dance'); // 'dance' | 'curriculum'
 
   return (
     <section id="projects" className="story-panel" style={{ backgroundColor: 'var(--bg-canvas)' }}>
@@ -1014,6 +1015,180 @@ export default function SelectedWorkSection() {
               >
                 <span>CLIENT TENURE: 2022–PRESENT</span>
                 <span style={{ color: 'var(--signal-emerald)' }}>VERIFIED PRODUCTION DEPLOYMENT</span>
+              </div>
+            </div>
+          </div>
+
+          {/* =========================================================================
+              LIVE CLIENT INTERFACE CAPTURES (PHOTOS FROM CHITRAN WEBSITE)
+              ========================================================================= */}
+          <div
+            style={{
+              marginTop: '2.5rem',
+              borderTop: '1px solid var(--border-subtle)',
+              paddingTop: '2rem',
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                gap: '1rem',
+                marginBottom: '1.25rem',
+              }}
+            >
+              <div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--signal-emerald)', fontWeight: 600 }}>
+                  PRODUCTION CLIENT INTERFACE CAPTURES
+                </div>
+                <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
+                  Live architectural captures from the shipped Chitran Institute web portal &amp; conversion funnels
+                </div>
+              </div>
+
+              {/* Toggle Switch between the 2 Website Captures */}
+              <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <button
+                  onClick={() => setChitranTab('dance')}
+                  style={{
+                    background: chitranTab === 'dance' ? 'var(--signal-emerald)' : 'rgba(255,255,255,0.03)',
+                    color: chitranTab === 'dance' ? '#000' : 'var(--text-secondary)',
+                    border: chitranTab === 'dance' ? '1px solid var(--signal-emerald)' : '1px solid var(--border-subtle)',
+                    padding: '0.4rem 0.85rem',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.74rem',
+                    fontWeight: 600,
+                    borderRadius: '2px',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                  }}
+                >
+                  01. HERO &amp; WHATSAPP FUNNEL
+                </button>
+                <button
+                  onClick={() => setChitranTab('curriculum')}
+                  style={{
+                    background: chitranTab === 'curriculum' ? 'var(--signal-emerald)' : 'rgba(255,255,255,0.03)',
+                    color: chitranTab === 'curriculum' ? '#000' : 'var(--text-secondary)',
+                    border: chitranTab === 'curriculum' ? '1px solid var(--signal-emerald)' : '1px solid var(--border-subtle)',
+                    padding: '0.4rem 0.85rem',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.74rem',
+                    fontWeight: 600,
+                    borderRadius: '2px',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                  }}
+                >
+                  02. 4-ACADEMY PETAL UI
+                </button>
+              </div>
+            </div>
+
+            {/* Browser Frame */}
+            <div
+              style={{
+                background: '#07090e',
+                border: '1px solid var(--border-subtle)',
+                borderRadius: '6px',
+                overflow: 'hidden',
+                boxShadow: '0 20px 48px rgba(0,0,0,0.6)',
+              }}
+            >
+              {/* Browser Header Bar */}
+              <div
+                style={{
+                  background: 'rgba(255,255,255,0.03)',
+                  borderBottom: '1px solid var(--border-subtle)',
+                  padding: '0.65rem 1rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.72rem',
+                  color: 'var(--text-muted)',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                  <div style={{ display: 'flex', gap: '5px' }}>
+                    <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#ff5f56' }} />
+                    <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#ffbd2e' }} />
+                    <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#27c93f' }} />
+                  </div>
+                  <span style={{ color: 'var(--text-secondary)', marginLeft: '0.5rem' }}>
+                    {chitranTab === 'dance'
+                      ? 'https://chitran.org/western-dance-academy'
+                      : 'https://chitran.org/curriculum-and-fees'}
+                  </span>
+                </div>
+
+                <span style={{ color: 'var(--signal-emerald)', fontWeight: 600 }}>
+                  [SHIPPED CLIENT INTERFACE]
+                </span>
+              </div>
+
+              {/* Screenshot Image Container */}
+              <div
+                style={{
+                  position: 'relative',
+                  width: '100%',
+                  background: '#040508',
+                  overflow: 'hidden',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <img
+                  src={
+                    chitranTab === 'dance'
+                      ? '/assets/chitran_hero_dance.png'
+                      : '/assets/chitran_curriculum_ui.png'
+                  }
+                  alt={
+                    chitranTab === 'dance'
+                      ? 'Chitran Institute Western Dance Academy Hero and WhatsApp intake funnel'
+                      : 'Chitran Institute interactive 4-academy petal curriculum and fee architecture'
+                  }
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    maxHeight: '620px',
+                    objectFit: 'contain',
+                    display: 'block',
+                    transition: 'opacity 0.25s ease',
+                  }}
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Technical Footnote Bar */}
+              <div
+                style={{
+                  padding: '0.85rem 1.25rem',
+                  background: 'rgba(12, 16, 24, 0.95)',
+                  borderTop: '1px solid var(--border-subtle)',
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  gap: '0.75rem',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.74rem',
+                }}
+              >
+                <div style={{ color: 'var(--text-secondary)' }}>
+                  {chitranTab === 'dance'
+                    ? 'Western Dance Academy: Admissions Open ticker, MSME & IFAA affiliations, direct WhatsApp conversion funnel, and studio video choreography.'
+                    : 'Interactive 4-Academy Petals: Custom radial navigation for Drawing, Music, Dance & Handwriting with verified 4.9 rating and IFAA certifications.'}
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span className="telemetry-badge badge-emerald" style={{ padding: '0.2rem 0.5rem', fontSize: '0.7rem' }}>
+                    120% CONVERSION ENGINE
+                  </span>
+                </div>
               </div>
             </div>
           </div>

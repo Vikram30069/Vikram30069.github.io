@@ -3,6 +3,7 @@ import { Database, Binary, Activity, Layers, Compass, CheckCircle2 } from 'lucid
 
 export default function AboutSection() {
   const [activeTab, setActiveTab] = useState('engineering'); // 'engineering' | 'operations'
+  const [proofRecord, setProofRecord] = useState('paytm'); // 'paytm' | 'chitran'
 
   return (
     <section id="about" className="story-panel" style={{ backgroundColor: 'var(--bg-canvas)' }}>
@@ -233,12 +234,43 @@ export default function AboutSection() {
                 }}
               >
                 <span>PROOF OF WORK // FIELD RECORD</span>
-                <span className="telemetry-badge badge-cyan" style={{ padding: '0.15rem 0.5rem' }}>
-                  PAYTM HACKATHON
-                </span>
+                <div style={{ display: 'flex', gap: '0.35rem' }}>
+                  <button
+                    onClick={() => setProofRecord('paytm')}
+                    style={{
+                      background: proofRecord === 'paytm' ? 'var(--signal-cyan)' : 'rgba(255,255,255,0.03)',
+                      color: proofRecord === 'paytm' ? '#000' : 'var(--text-muted)',
+                      border: proofRecord === 'paytm' ? '1px solid var(--signal-cyan)' : '1px solid var(--border-subtle)',
+                      padding: '0.2rem 0.5rem',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.7rem',
+                      borderRadius: '2px',
+                      cursor: 'pointer',
+                      fontWeight: 600,
+                    }}
+                  >
+                    PAYTM HACKATHON
+                  </button>
+                  <button
+                    onClick={() => setProofRecord('chitran')}
+                    style={{
+                      background: proofRecord === 'chitran' ? 'var(--signal-emerald)' : 'rgba(255,255,255,0.03)',
+                      color: proofRecord === 'chitran' ? '#000' : 'var(--text-muted)',
+                      border: proofRecord === 'chitran' ? '1px solid var(--signal-emerald)' : '1px solid var(--border-subtle)',
+                      padding: '0.2rem 0.5rem',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.7rem',
+                      borderRadius: '2px',
+                      cursor: 'pointer',
+                      fontWeight: 600,
+                    }}
+                  >
+                    CHITRAN WEB
+                  </button>
+                </div>
               </div>
 
-              {/* Real Photo Slot from User: Paytm Hackathon Desk */}
+              {/* Dynamic Photo Slot */}
               <div
                 style={{
                   position: 'relative',
@@ -248,11 +280,20 @@ export default function AboutSection() {
                   overflow: 'hidden',
                   marginBottom: '1rem',
                   border: '1px solid var(--border-subtle)',
+                  background: '#040508',
                 }}
               >
                 <img
-                  src="/assets/vikram_paytm_hackathon.png"
-                  alt="Vikram Banerjee engineering Datadrishti at Paytm Hackathon"
+                  src={
+                    proofRecord === 'paytm'
+                      ? '/assets/vikram_paytm_hackathon.png'
+                      : '/assets/chitran_curriculum_ui.png'
+                  }
+                  alt={
+                    proofRecord === 'paytm'
+                      ? 'Vikram Banerjee engineering Datadrishti at Paytm Hackathon'
+                      : 'Chitran Institute production website and curriculum portal'
+                  }
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   loading="lazy"
                 />
@@ -261,17 +302,17 @@ export default function AboutSection() {
                     position: 'absolute',
                     top: '8px',
                     left: '8px',
-                    background: 'rgba(0,0,0,0.7)',
+                    background: 'rgba(0,0,0,0.75)',
                     backdropFilter: 'blur(4px)',
                     padding: '2px 8px',
                     fontFamily: 'var(--font-mono)',
                     fontSize: '0.68rem',
-                    color: 'var(--signal-cyan)',
+                    color: proofRecord === 'paytm' ? 'var(--signal-cyan)' : 'var(--signal-emerald)',
                     borderRadius: '2px',
-                    border: '1px solid rgba(0, 240, 255, 0.3)',
+                    border: `1px solid ${proofRecord === 'paytm' ? 'rgba(0, 240, 255, 0.3)' : 'rgba(16, 185, 129, 0.3)'}`,
                   }}
                 >
-                  LIVE PROTOTYPING // DATADRISHTI
+                  {proofRecord === 'paytm' ? 'LIVE PROTOTYPING // DATADRISHTI' : 'SHIPPED CLIENT // CHITRAN.ORG'}
                 </div>
               </div>
             </div>
@@ -287,9 +328,11 @@ export default function AboutSection() {
               }}
             >
               <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.25rem' }}>
-                Field Context:
+                {proofRecord === 'paytm' ? 'Field Context (Paytm):' : 'Production Scope (Chitran):'}
               </div>
-              Vikram on-site during the intense development cycle of Datadrishti (Paytm IntentGuard) — testing real-time UPI stress anomaly models under tight compute budgets.
+              {proofRecord === 'paytm'
+                ? 'Vikram on-site during the intense development cycle of Datadrishti (Paytm IntentGuard) — testing real-time UPI stress anomaly models under tight compute budgets.'
+                : 'Directing full digital operations for Chitran Institute: custom web portal architecture, Google Business Profile API synchronization, and Rank Math SEO that drove +120% enrollment growth.'}
             </div>
           </div>
         </div>
