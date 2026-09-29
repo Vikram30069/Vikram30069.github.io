@@ -124,5 +124,11 @@ portfoliowebsite/
 3. **NodIn Computer Vision Geofence Simulator**:
    Toggle between *In-Bounds* and *Spoof Anomaly* to preview spatial matrix bounding coordinate validation.
 
-4. **Hyderabad IST Live Telemetry**:
+4. **Chitran Institute Shipped Client Telemetry Comparator**:
+   Interactive before/after switch comparing *Pre-Deployment [2022]* against *Shipped Client [Live]*:
+   - `+120% Student Enrollment Surge`
+   - `Rank Math SEO Score`: 98 / 100 (#1-3 Local Search Position in Hyderabad)
+   - `Community Growth`: 3,000+ organic students
+
+5. **Hyderabad IST Live Telemetry**:
    Accurate live clock synced with `Asia/Kolkata` time zone directly in the persistent navigation bar.
