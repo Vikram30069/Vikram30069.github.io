@@ -1,0 +1,330 @@
+/* ==========================================================================
+   VIKRAM BANERJEE — SIGNAL VS. NOISE PORTFOLIO DESIGN SYSTEM
+   Art-directed aesthetic calibrated for Awwwards / FWA consideration.
+   Zero generic SaaS styling. Bespoke telemetry and spatial typography.
+   ========================================================================== */
+
+:root {
+  /* Chromatic Foundation: Deep Obsidian Charcoal Canvas */
+  --bg-canvas: #07080c;
+  --bg-surface: #0c0f16;
+  --bg-elevated: #121722;
+  --bg-subtle: rgba(255, 255, 255, 0.03);
+  --bg-glass: rgba(12, 15, 22, 0.72);
+
+  /* Signal Carriers */
+  --signal-cyan: #00f0ff;
+  --signal-cyan-dim: rgba(0, 240, 255, 0.15);
+  --signal-cyan-glow: rgba(0, 240, 255, 0.35);
+  --signal-emerald: #10b981;
+  --signal-emerald-dim: rgba(16, 185, 129, 0.15);
+  --signal-amber: #f59e0b;
+  --signal-amber-dim: rgba(245, 158, 11, 0.15);
+
+  /* Alert / Anomaly Accent: STRICTLY reserved for risk, anomaly, detection */
+  --alert-red: #ff3344;
+  --alert-red-dim: rgba(255, 51, 68, 0.18);
+  --alert-red-glow: rgba(255, 51, 68, 0.45);
+
+  /* Neutral Tone Scale */
+  --text-high: #f8fafc;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-subtle: #475569;
+
+  /* Architectural Grid & Borders */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-active: rgba(0, 240, 255, 0.3);
+  --border-alert: rgba(255, 51, 68, 0.4);
+  --border-highlight: rgba(255, 255, 255, 0.16);
+
+  /* Typography Scales */
+  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+  /* Motion & Easing */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
+  --transition-fast: 160ms var(--ease-out-expo);
+  --transition-normal: 320ms var(--ease-out-expo);
+  --transition-slow: 600ms var(--ease-out-expo);
+}
+
+/* Base Reset & Setup */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: auto; /* Handled smoothly by Lenis */
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Respect Accessibility: Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Background Subtle Matrix Grid */
+.matrix-grid-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 80%);
+}
+
+/* Subtle Vignette */
+.ambient-vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(circle at 50% 50%, transparent 60%, rgba(7, 8, 12, 0.8) 100%);
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-canvas);
+}
+::-webkit-scrollbar-thumb {
+  background: #232938;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--signal-cyan);
+}
+
+/* Focus Visible Accessibility */
+:focus-visible {
+  outline: 2px solid var(--signal-cyan);
+  outline-offset: 3px;
+}
+
+/* Monospace Utilities */
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Layout Utilities */
+.container-custom {
+  max-width: 1380px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1.25rem, 5vw, 3.5rem);
+  padding-right: clamp(1.25rem, 5vw, 3.5rem);
+  width: 100%;
+}
+
+/* Section Shell */
+.story-panel {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(5rem, 10vh, 8rem) 0;
+  border-bottom: 1px solid var(--border-subtle);
+  z-index: 2;
+}
+
+/* Precision Index Header */
+.panel-index {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+.panel-index .index-num {
+  color: var(--signal-cyan);
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  background: var(--signal-cyan-dim);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: 2px;
+}
+
+.panel-index .index-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.panel-index .index-status::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background-color: var(--signal-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--signal-cyan);
+}
+
+/* Primary Glass & Panel Surfaces */
+.signal-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  position: relative;
+  transition: border-color var(--transition-normal), background-color var(--transition-normal);
+}
+
+.signal-card:hover {
+  border-color: var(--border-active);
+}
+
+/* Alert Card Specifics (for Datadrishti & Risk Moments) */
+.signal-card.card-alert:hover {
+  border-color: var(--border-alert);
+}
+
+/* Button & Interactive Trigger Styles */
+.btn-signal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: var(--signal-cyan);
+  color: #050608;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.8rem 1.4rem;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+}
+
+.btn-signal:hover {
+  transform: translateY(-2px);
+  background: #38f4ff;
+  box-shadow: 0 0 24px var(--signal-cyan-glow);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-high);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.8rem 1.4rem;
+  border-radius: 2px;
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--border-highlight);
+  transform: translateY(-2px);
+}
+
+/* Telemetry Badge */
+.telemetry-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+.telemetry-badge.badge-cyan {
+  color: var(--signal-cyan);
+  border-color: rgba(0, 240, 255, 0.25);
+  background: var(--signal-cyan-dim);
+}
+
+.telemetry-badge.badge-alert {
+  color: var(--alert-red);
+  border-color: rgba(255, 51, 68, 0.3);
+  background: var(--alert-red-dim);
+}
+
+.telemetry-badge.badge-emerald {
+  color: var(--signal-emerald);
+  border-color: rgba(16, 185, 129, 0.25);
+  background: var(--signal-emerald-dim);
+}
+
+/* Oscilloscope line animation */
+@keyframes signalPulse {
+  0% { transform: scaleX(0.96); opacity: 0.7; }
+  50% { transform: scaleX(1.02); opacity: 1; }
+  100% { transform: scaleX(0.96); opacity: 0.7; }
+}
+
+.signal-live-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 18px;
+}
+
+.signal-bar-segment {
+  width: 3px;
+  background: var(--signal-cyan);
+  border-radius: 1px;
+  animation: pulseBar 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes pulseBar {
+  0% { height: 4px; opacity: 0.4; }
+  100% { height: 16px; opacity: 1; }
+}
+
+/* Selection Color */
+::selection {
+  background: var(--signal-cyan);
+  color: #000;
+}
