@@ -49,6 +49,16 @@ export default function EducationSection() {
       years: '2020–2021',
       details: 'Awarded gold medal standing in competitive mathematical proofs, number theory, and discrete combinatorics.',
     },
+    {
+      title: '5th State Rank — National Level Yoga Competitions',
+      years: 'State Rank',
+      details: 'Recognized for physiological discipline, mental fortitude, and competitive precision.',
+    },
+    {
+      title: '1st Place — National Level Fine Arts Exhibition',
+      years: 'Pondicherry',
+      details: 'First place distinction in national visual arts, bridging visual design discipline with engineering systems.',
+    },
   ];
 
   return (

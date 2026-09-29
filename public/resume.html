@@ -3,281 +3,533 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vikram Banerjee — Technical Resume</title>
+  <title>Vikram Banerjee — Official Technical Resume</title>
   <style>
     :root {
-      --primary: #0f172a;
-      --secondary: #334155;
-      --accent: #0284c7;
-      --border: #cbd5e1;
-      --bg: #ffffff;
+      --text-black: #000000;
+      --text-dark: #111827;
+      --text-secondary: #374151;
+      --border-dark: #000000;
+      --link-blue: #0969da;
+      --bg-page: #f1f5f9;
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      background: #f8fafc;
-      color: var(--primary);
-      line-height: 1.45;
-      font-size: 13px;
-      padding: 24px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-dark);
+      line-height: 1.35;
+      font-size: 9.5pt;
+      padding: 24px 12px;
+      -webkit-font-smoothing: antialiased;
     }
-    .resume-container {
-      max-width: 820px;
-      margin: 0 auto;
-      background: #fff;
-      padding: 40px 48px;
-      border: 1px solid var(--border);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-    }
-    header {
-      border-bottom: 2px solid var(--primary);
-      padding-bottom: 16px;
-      margin-bottom: 18px;
-    }
-    h1 {
-      font-size: 26px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      color: var(--primary);
-      margin-bottom: 4px;
-    }
-    .subtitle {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--accent);
-      margin-bottom: 8px;
-    }
-    .contact-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      font-size: 12px;
-      color: var(--secondary);
-    }
-    .contact-bar a {
-      color: var(--secondary);
-      text-decoration: none;
-    }
-    .contact-bar a:hover { text-decoration: underline; color: var(--accent); }
-    section { margin-bottom: 18px; }
-    h2 {
-      font-size: 13px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: var(--primary);
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 4px;
-      margin-bottom: 10px;
-    }
-    .entry { margin-bottom: 12px; }
-    .entry-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      font-weight: 700;
-      font-size: 13px;
-    }
-    .entry-sub {
-      display: flex;
-      justify-content: space-between;
-      color: var(--secondary);
-      font-size: 12px;
-      font-style: italic;
-      margin-bottom: 4px;
-    }
-    ul { list-style-position: outside; margin-left: 16px; color: #1e293b; }
-    li { margin-bottom: 3px; font-size: 12.5px; }
-    .skill-group { margin-bottom: 6px; font-size: 12.5px; }
-    .skill-title { font-weight: 700; color: var(--primary); }
+
+    /* Actions Bar (Screen only) */
     .actions-bar {
       max-width: 820px;
       margin: 0 auto 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 10px 16px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
+
+    .btn-back {
+      color: #0f172a;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-back:hover {
+      color: #0284c7;
+      text-decoration: underline;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
     .btn-print {
       background: #0284c7;
-      color: #fff;
+      color: #ffffff;
       border: none;
-      padding: 8px 16px;
+      padding: 7px 16px;
       font-size: 13px;
       font-weight: 600;
       border-radius: 4px;
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s ease;
     }
-    .btn-print:hover { background: #0369a1; }
-    .btn-back {
-      color: #475569;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 500;
+    .btn-print:hover {
+      background: #0369a1;
     }
-    .btn-back:hover { text-decoration: underline; }
+
+    .btn-copy {
+      background: #f8fafc;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+      padding: 6px 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-copy:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    /* Paper Page Container (Exactly 1 page calibrated) */
+    .resume-sheet {
+      max-width: 820px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 32px 42px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e2e8f0;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    h1.name {
+      font-size: 21pt;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: var(--text-black);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .contact-line {
+      font-size: 9pt;
+      color: var(--text-secondary);
+      margin-bottom: 3px;
+    }
+
+    .links-line {
+      font-size: 9pt;
+      font-weight: 600;
+    }
+
+    a {
+      color: var(--link-blue);
+      text-decoration: underline;
+    }
+
+    /* Summary */
+    .executive-summary {
+      font-size: 8.8pt;
+      line-height: 1.36;
+      text-align: justify;
+      color: #1f2937;
+      margin-bottom: 12px;
+    }
+
+    /* Section Headers */
+    section {
+      margin-bottom: 11px;
+    }
+
+    h2.section-title {
+      font-size: 10pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-black);
+      border-bottom: 1.5px solid var(--border-dark);
+      padding-bottom: 2px;
+      margin-bottom: 6px;
+    }
+
+    /* Entries */
+    .entry {
+      margin-bottom: 7px;
+    }
+
+    .entry-headline {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 9.3pt;
+      font-weight: 700;
+      color: var(--text-black);
+    }
+
+    .entry-location-date {
+      font-weight: 600;
+      font-size: 8.8pt;
+      color: var(--text-black);
+      white-space: nowrap;
+    }
+
+    .entry-subline {
+      font-size: 8.6pt;
+      color: var(--text-secondary);
+      margin-bottom: 2px;
+    }
+
+    .entry-project-link {
+      font-size: 8.5pt;
+      margin-bottom: 2px;
+    }
+
+    /* Bullet Lists */
+    ul.bullet-list {
+      list-style-type: disc;
+      margin-left: 17px;
+      padding-left: 0;
+    }
+
+    ul.bullet-list li {
+      font-size: 8.7pt;
+      line-height: 1.33;
+      color: #1e293b;
+      margin-bottom: 2.5px;
+      text-align: justify;
+    }
+
+    /* Skills Grid */
+    .skill-row {
+      font-size: 8.7pt;
+      line-height: 1.36;
+      margin-bottom: 3px;
+    }
+    .skill-cat {
+      font-weight: 700;
+      color: var(--text-black);
+    }
+
+    /* Print Specifics (100% Page Fit) */
+    @page {
+      size: A4 portrait;
+      margin: 8mm 10mm;
+    }
+
     @media print {
-      body { background: #fff; padding: 0; }
-      .resume-container { border: none; box-shadow: none; padding: 0; }
-      .actions-bar { display: none; }
+      body {
+        background: #ffffff !important;
+        padding: 0 !important;
+        font-size: 9.2pt;
+      }
+      .actions-bar {
+        display: none !important;
+      }
+      .resume-sheet {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+      a {
+        color: var(--text-black) !important;
+        text-decoration: none !important;
+      }
+      .entry {
+        page-break-inside: avoid;
+      }
     }
   </style>
 </head>
 <body>
+
+  <!-- Top Action Bar -->
   <div class="actions-bar">
-    <a href="/" class="btn-back">&larr; Back to Portfolio</a>
-    <button class="btn-print" onclick="window.print()">Print / Save as PDF</button>
+    <a href="/" class="btn-back">
+      &larr; Back to Portfolio
+    </a>
+    <div class="action-buttons">
+      <button class="btn-copy" onclick="copyResumeText()">
+        Copy Plaintext for ATS
+      </button>
+      <button class="btn-print" onclick="window.print()">
+        Print / Save as PDF
+      </button>
+    </div>
   </div>
 
-  <main class="resume-container">
+  <!-- Resume Sheet (Exact Replica of Official Resume) -->
+  <main class="resume-sheet" id="resume-content">
     <header>
-      <h1>VIKRAM BANERJEE</h1>
-      <div class="subtitle">AI Systems Engineer &bull; Data Science &bull; Software Engineering</div>
-      <div class="contact-bar">
-        <span>Hyderabad, India</span>
-        <span>&bull;</span>
-        <a href="mailto:vikramb9291@gmail.com">vikramb9291@gmail.com</a>
-        <span>&bull;</span>
-        <span>+91 6304589007</span>
-        <span>&bull;</span>
-        <a href="https://github.com/Vikram30069" target="_blank">github.com/Vikram30069</a>
-        <span>&bull;</span>
-        <a href="https://linkedin.com/in/vikram-banerjee-a10111282" target="_blank">linkedin.com/in/vikram-banerjee</a>
+      <h1 class="name">VIKRAM BANERJEE</h1>
+      <div class="contact-line">
+        Hyderabad, India &nbsp;|&nbsp; +91 6304589007 &nbsp;|&nbsp; 
+        <a href="mailto:vikramb9291@gmail.com">vikramb9291@gmail.com</a> &nbsp;|&nbsp; 
+        <a href="mailto:23f3002056@ds.study.iitm.ac.in">23f3002056@ds.study.iitm.ac.in</a>
+      </div>
+      <div class="links-line">
+        <a href="https://linkedin.com/in/vikram-banerjee-a10111282" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        &nbsp;|&nbsp;
+        <a href="https://github.com/Vikram30069" target="_blank" rel="noopener noreferrer">GitHub</a>
       </div>
     </header>
 
+    <div class="executive-summary">
+      Computer Science and Data Science undergraduate (IIT Madras + Matrusri Engineering College) with hands-on experience across agentic AI systems, multi-agent orchestration, computer vision, and production Python backends, alongside real-world operations and digital-growth leadership. Built end-to-end AI products integrating CrewAI, Twilio WhatsApp/voice dispatch, AWS, Docker, and GitHub CI/CD. Proficient in Python, SQL, Java, MERN, FastAPI, and multi-provider LLM deployment (OpenAI, Gemini, Ollama, LiteLLM). AWS Academy-certified in Data Engineering, with proven experience leading teams and driving measurable digital growth.
+    </div>
+
+    <!-- Education -->
     <section>
-      <h2>Education</h2>
+      <h2 class="section-title">EDUCATION</h2>
       <div class="entry">
-        <div class="entry-header">
-          <span>Indian Institute of Technology Madras (IIT Madras)</span>
-          <span>Expected 2027</span>
+        <div class="entry-headline">
+          <span>B.Sc. in Data Science and Applications | Indian Institute of Technology Madras (IITM)</span>
+          <span class="entry-location-date">Expected 2027</span>
         </div>
-        <div class="entry-sub">
-          <span>Bachelor of Science (B.Sc.) in Data Science and Applications</span>
-          <span>Chennai / Online</span>
+        <div class="entry-subline">
+          Focus: Statistical Inference, Machine Learning, Database Management (SQL) &nbsp;|&nbsp; Student ID: 23f3002056
         </div>
-        <ul>
-          <li>Focus: Machine Learning, Statistical Inference, Mathematical Anomaly Detection, Database Management.</li>
+      </div>
+      <div class="entry">
+        <div class="entry-headline">
+          <span>B.E. in Computer Science and Engineering | Matrusri Engineering College</span>
+          <span class="entry-location-date">Expected 2027 | Hyderabad</span>
+        </div>
+        <div class="entry-subline">
+          Focus: Algorithms, Cloud Computing (AWS), Distributed Systems, Web Architectures
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications -->
+    <section>
+      <h2 class="section-title">CERTIFICATIONS</h2>
+      <div class="entry">
+        <div class="entry-headline">
+          <span>Data Engineering Virtual Internship (8 Weeks) | AICTE EduSkills, Curriculum by AWS Academy</span>
+          <span class="entry-location-date">Jun – Aug 2026</span>
+        </div>
+        <div class="entry-subline">
+          Grade: A (Very Good, 70–79 band) &nbsp;|&nbsp; Certificate ID: 4bba844946995c080f93
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Skills -->
+    <section>
+      <h2 class="section-title">TECHNICAL SKILLS</h2>
+      <div class="skill-row">
+        <span class="skill-cat">Programming Languages:</span> Python, SQL, Java, C, R, JavaScript, TypeScript, HTML, CSS
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">AI / ML &amp; Agents:</span> CrewAI, LangChain, Agentic AI Pipelines, Multi-Agent Orchestration, Scikit-learn, TensorFlow, PyTorch, XGBoost, OpenCV
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Web &amp; Frameworks:</span> MERN Stack (MongoDB, Express.js, React.js, Node.js), FastAPI, Next.js, WordPress, REST APIs
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Databases:</span> PostgreSQL, MySQL, MongoDB, Supabase, Redis
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Cloud &amp; DevOps:</span> AWS (EC2, S3, RDS, ECS, CloudFront, Bedrock, SNS, VPC), Docker, Docker Compose, GitHub CI/CD, Linux, Git
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Integrations, Analytics &amp; Growth:</span> Twilio (WhatsApp &amp; Voice), Ollama, LiteLLM, Power BI, Tableau, Pandas, NumPy, Rank Math SEO, Google Business Profile, Social Media Growth
+      </div>
+    </section>
+
+    <!-- Professional Experience -->
+    <section>
+      <h2 class="section-title">PROFESSIONAL EXPERIENCE</h2>
+      
+      <div class="entry">
+        <div class="entry-headline">
+          <span>Machine Learning and Data Engineering Intern | Viswam AI</span>
+          <span class="entry-location-date">2023 – Present | Hyderabad, India</span>
+        </div>
+        <ul class="bullet-list">
+          <li>Contributed to development and optimization of a regional LLM prototype, building automated data ingestion and cleansing pipelines in Python to process 15 GB+ of unstructured datasets, reducing deployment latency by 20%.</li>
+          <li>Maintained and optimized distributed model inference scripts on AWS EC2 clusters, reducing computational overhead by 15% and improving token-throughput efficiency.</li>
         </ul>
       </div>
 
       <div class="entry">
-        <div class="entry-header">
-          <span>Matrusri Engineering College</span>
-          <span>Expected 2027</span>
+        <div class="entry-headline">
+          <span>Director of Programs and Operations | Chitran Institute of Drawing, Painting, Music, Dance &amp; Handwriting</span>
+          <span class="entry-location-date">2022 – Present | Hyderabad, India</span>
         </div>
-        <div class="entry-sub">
-          <span>Bachelor of Engineering (B.E.) in Computer Science and Engineering</span>
-          <span>Hyderabad, India</span>
+        <ul class="bullet-list">
+          <li>Manage the institute's website, Google Business Profile, and SEO (Rank Math), improving local search visibility and inbound inquiries.</li>
+          <li>Run social media strategy and content, growing the Instagram presence to 3,000+ followers, and handle reputation management including responses to reviews.</li>
+          <li>Designed data-driven digital marketing and SEO campaigns that increased institutional enrollment by 120%, and manage hiring, scheduling, and resource allocation.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-headline">
+          <span>Project Executive &amp; Facilitator | Bajaj Foundation</span>
+          <span class="entry-location-date">Present | Government of Telangana Program</span>
         </div>
-        <ul>
-          <li>Focus: Data Structures &amp; Algorithms, Distributed Systems, Asynchronous Networks, Cloud Computing.</li>
+        <ul class="bullet-list">
+          <li>Facilitate program activities and on-ground execution for a state government initiative, coordinating with stakeholders and ensuring adherence to program guidelines.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-headline">
+          <span>City Operations Head — Hyderabad | Boundless, IITM BS Travel Society</span>
+          <span class="entry-location-date">May 2025 – Present | Hyderabad (Hybrid)</span>
+        </div>
+        <ul class="bullet-list">
+          <li>Serve as the official Hyderabad city representative for the IITM BS student network, organizing meetups and coordinating regional community engagement.</li>
+          <li>Ensure smooth tour logistics and maintain an active student community presence using local knowledge and leadership.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-headline">
+          <span>Core Member | Diplomacia</span>
+          <span class="entry-location-date">Jun 2024 – Present</span>
+        </div>
+        <ul class="bullet-list">
+          <li>Conduct debate sessions, JAM rounds, candidate screening, and MUN delegate/EB selections as an active core organizational member.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-headline">
+          <span>Public Relations Specialist | NebulaPioneers</span>
+          <span class="entry-location-date">Jul 2024 – Present | On-site</span>
+        </div>
+        <ul class="bullet-list">
+          <li>Manage stakeholder communications and candidate screening/interview pipelines, coordinating cross-functional outreach.</li>
         </ul>
       </div>
     </section>
 
+    <!-- Technical Projects -->
     <section>
-      <h2>Featured Production Systems</h2>
+      <h2 class="section-title">TECHNICAL PROJECTS</h2>
+
       <div class="entry">
-        <div class="entry-header">
+        <div class="entry-headline">
+          <span>RescueNet AI — Multi-Agent Disaster Response and Survivor Prioritization System</span>
+          <span class="entry-location-date">Agentic AI, Python, FastAPI, CrewAI, Twilio, AWS, Docker</span>
+        </div>
+        <div class="entry-project-link">
+          <a href="https://github.com/Vikram30069/RescueNet-AI" target="_blank" rel="noopener noreferrer">github.com/Vikram30069/RescueNet-AI</a>
+        </div>
+        <ul class="bullet-list">
+          <li>Architected a 10-agent CrewAI pipeline (triage, resource allocation, hospital matching, dispatch) with task-context chaining, backed by a FastAPI/Pydantic v2 service and PostgreSQL/Supabase database integrating 148 real Telangana emergency assets.</li>
+          <li>Integrated Twilio WhatsApp/voice dispatch for real-time responder alerts, configured multi-provider LLM support (OpenAI, Gemini, Ollama, LiteLLM), and deployed on AWS (ECS, RDS, S3, CloudFront, Bedrock) with a Next.js dashboard and GitHub CI/CD.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-headline">
           <span>Datadrishti (Paytm IntentGuard) — Contextual Payment Security Layer</span>
-          <a href="https://github.com/Vikram30069/datadrishti" target="_blank" style="color:var(--accent);font-size:12px;">github.com/Vikram30069/datadrishti</a>
+          <span class="entry-location-date">Behavioral Anomaly Detection, Statistical Risk Scoring, Fraud Prevention</span>
         </div>
-        <ul>
-          <li>Architected behavioral anomaly detection engine protecting UPI transfers against coercion, duress, and panic-induced financial fraud.</li>
-          <li>Evaluates transactions against individual Median and Median Absolute Deviation (MAD) distributions instead of outlier-skewed averages.</li>
-          <li>Calibrated 6 risk vectors (Amount, Recipient, Device, Time, Geo, Velocity Surges) mapped to adaptive friction policies (0-30 frictionless, 56-80 biometrics, &gt;80 hold).</li>
-        </ul>
-      </div>
-
-      <div class="entry">
-        <div class="entry-header">
-          <span>RescueNet AI — Multi-Agent Disaster Response &amp; Dispatcher</span>
-          <a href="https://github.com/Vikram30069/RescueNet-AI" target="_blank" style="color:var(--accent);font-size:12px;">github.com/Vikram30069/RescueNet-AI</a>
+        <div class="entry-project-link">
+          <a href="https://github.com/Vikram30069/datadrishti" target="_blank" rel="noopener noreferrer">github.com/Vikram30069/datadrishti</a>
         </div>
-        <ul>
-          <li>Engineered 10-agent CrewAI pipeline (triage, resource allocation, hospital matching, automated voice/SMS dispatch) with strict task-context chaining.</li>
-          <li>FastAPI backend (Pydantic v2), PostgreSQL/Supabase index of 148 Telangana emergency facilities, Twilio WhatsApp and automated voice dispatch.</li>
-          <li>Multi-provider LLM support (Gemini, Claude, GPT-4o, Ollama, LiteLLM) deployed on AWS (ECS, RDS, S3, CloudFront, Bedrock).</li>
-        </ul>
-      </div>
-
-      <div class="entry">
-        <div class="entry-header">
-          <span>NodIn — Computer Vision Framework with Anti-Spoofing Geofencing</span>
-          <a href="https://github.com/Vikram30069/NodIn" target="_blank" style="color:var(--accent);font-size:12px;">github.com/Vikram30069/NodIn</a>
-        </div>
-        <ul>
-          <li>Real-time facial recognition and attendance automation pipeline applying matrix transformations directly to continuous live video feeds.</li>
-          <li>Integrated anti-spoofing geofence logic restricting biometric registration strictly to validated physical GPS/Wi-Fi polygon perimeters.</li>
-        </ul>
-      </div>
-
-      <div class="entry">
-        <div class="entry-header">
-          <span>Chitran Institute — Digital Ecosystem &amp; Growth Engine (Client Shipped)</span>
-          <a href="https://github.com/Vikram30069/chitran-digital-ecosystem" target="_blank" style="color:var(--accent);font-size:12px;">github.com/Vikram30069/chitran-digital-ecosystem</a>
-        </div>
-        <ul>
-          <li>Engineered full digital infrastructure, Google Business Profile API sync, and Rank Math SEO for 23-year-old arts institution.</li>
-          <li>Increased active student enrollment by 120% YoY through optimized high-conversion student acquisition funnels.</li>
+        <ul class="bullet-list">
+          <li>Built a behavioral anomaly detection layer protecting UPI transfers against coercion, distress, and panic-induced fraud, using personal-baseline analytics (Median/MAD distributions) instead of vulnerable arithmetic averages.</li>
+          <li>Designed 6 calibrated, weighted risk signals (Amount, Recipient/Device Novelty, Time, Geo, Velocity) driving adaptive friction policies — from frictionless 1-tap transfers to step-up biometric and out-of-band hold verification for high-risk transactions.</li>
         </ul>
       </div>
     </section>
 
+    <!-- Honors and Achievements -->
     <section>
-      <h2>Experience &amp; Leadership</h2>
-      <div class="entry">
-        <div class="entry-header">
-          <span>Viswam AI &mdash; Machine Learning and Data Engineering Intern</span>
-          <span>2023 &ndash; Present</span>
-        </div>
-        <ul>
-          <li>Engineered automated data ingestion/cleansing pipelines processing 15GB+ of unstructured data.</li>
-          <li>Contributed to regional LLM prototype optimization, reducing deployment latency by 20% and EC2 compute overhead by 15%.</li>
-        </ul>
-      </div>
-
-      <div class="entry">
-        <div class="entry-header">
-          <span>Chitran Institute &mdash; Director of Programs and Operations</span>
-          <span>2022 &ndash; Present</span>
-        </div>
-        <ul>
-          <li>Manages institutional web platform, SEO, and reputation management; scaled Instagram community to 3,000+ followers.</li>
-        </ul>
-      </div>
-
-      <div class="entry">
-        <div class="entry-header">
-          <span>Bajaj Foundation &mdash; Project Executive &amp; Facilitator (Govt of Telangana Program)</span>
-          <span>Present</span>
-        </div>
-      </div>
-
-      <div class="entry">
-        <div class="entry-header">
-          <span>Boundless, IITM BS Travel Society &mdash; City Operations Head, Hyderabad</span>
-          <span>May 2025 &ndash; Present</span>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2>Certifications &amp; Distinctions</h2>
-      <ul>
-        <li><strong>AWS Academy / AICTE EduSkills</strong>: Data Engineering Virtual Internship (8 weeks), Grade A (Cert ID: <code>4bba844946995c080f93</code>).</li>
-        <li><strong>Gold Medalist</strong>: National Science Olympiad (NSO, 2019–2021) &amp; International Mathematics Olympiad (IMO, 2020–2021).</li>
+      <h2 class="section-title">HONORS AND ACHIEVEMENTS</h2>
+      <ul class="bullet-list">
+        <li>Gold Medalist — National Science Olympiad (2019–2021) &amp; International Mathematics Olympiad (2020–2021); 5th State Rank, National Level Yoga Competitions; 1st Place, National Level Fine Arts Exhibition, Pondicherry.</li>
       </ul>
     </section>
-
-    <section>
-      <h2>Technical Skills</h2>
-      <div class="skill-group"><span class="skill-title">Languages:</span> Python, SQL, Java, JavaScript, TypeScript, C</div>
-      <div class="skill-group"><span class="skill-title">AI &amp; ML:</span> CrewAI, LangChain, PyTorch, TensorFlow, Scikit-learn, XGBoost, OpenCV</div>
-      <div class="skill-group"><span class="skill-title">Cloud &amp; Systems:</span> AWS (ECS, RDS, S3, CloudFront, Bedrock), Docker, FastAPI, PostgreSQL, Supabase, Redis, GitHub CI/CD</div>
-      <div class="skill-group"><span class="skill-title">Integrations &amp; Web:</span> Twilio (Voice/WhatsApp), OpenAI, Gemini, Ollama, LiteLLM, Next.js, MERN Stack</div>
-    </section>
   </main>
+
+  <script>
+    function copyResumeText() {
+      const text = `VIKRAM BANERJEE
+Hyderabad, India | +91 6304589007 | vikramb9291@gmail.com | 23f3002056@ds.study.iitm.ac.in
+LinkedIn: https://linkedin.com/in/vikram-banerjee-a10111282 | GitHub: https://github.com/Vikram30069
+
+SUMMARY
+Computer Science and Data Science undergraduate (IIT Madras + Matrusri Engineering College) with hands-on experience across agentic AI systems, multi-agent orchestration, computer vision, and production Python backends, alongside real-world operations and digital-growth leadership. Built end-to-end AI products integrating CrewAI, Twilio WhatsApp/voice dispatch, AWS, Docker, and GitHub CI/CD. Proficient in Python, SQL, Java, MERN, FastAPI, and multi-provider LLM deployment (OpenAI, Gemini, Ollama, LiteLLM). AWS Academy-certified in Data Engineering, with proven experience leading teams and driving measurable digital growth.
+
+EDUCATION
+B.Sc. in Data Science and Applications | Indian Institute of Technology Madras (IITM) [Expected 2027]
+Focus: Statistical Inference, Machine Learning, Database Management (SQL) | Student ID: 23f3002056
+
+B.E. in Computer Science and Engineering | Matrusri Engineering College [Expected 2027 | Hyderabad]
+Focus: Algorithms, Cloud Computing (AWS), Distributed Systems, Web Architectures
+
+CERTIFICATIONS
+Data Engineering Virtual Internship (8 Weeks) | AICTE EduSkills, Curriculum by AWS Academy [Jun – Aug 2026]
+Grade: A (Very Good, 70–79 band) | Certificate ID: 4bba844946995c080f93
+
+TECHNICAL SKILLS
+Programming Languages: Python, SQL, Java, C, R, JavaScript, TypeScript, HTML, CSS
+AI / ML & Agents: CrewAI, LangChain, Agentic AI Pipelines, Multi-Agent Orchestration, Scikit-learn, TensorFlow, PyTorch, XGBoost, OpenCV
+Web & Frameworks: MERN Stack (MongoDB, Express.js, React.js, Node.js), FastAPI, Next.js, WordPress, REST APIs
+Databases: PostgreSQL, MySQL, MongoDB, Supabase, Redis
+Cloud & DevOps: AWS (EC2, S3, RDS, ECS, CloudFront, Bedrock, SNS, VPC), Docker, Docker Compose, GitHub CI/CD, Linux, Git
+Integrations, Analytics & Growth: Twilio (WhatsApp & Voice), Ollama, LiteLLM, Power BI, Tableau, Pandas, NumPy, Rank Math SEO, Google Business Profile, Social Media Growth
+
+PROFESSIONAL EXPERIENCE
+Machine Learning and Data Engineering Intern | Viswam AI [2023 – Present | Hyderabad, India]
+• Contributed to development and optimization of a regional LLM prototype, building automated data ingestion and cleansing pipelines in Python to process 15 GB+ of unstructured datasets, reducing deployment latency by 20%.
+• Maintained and optimized distributed model inference scripts on AWS EC2 clusters, reducing computational overhead by 15% and improving token-throughput efficiency.
+
+Director of Programs and Operations | Chitran Institute of Drawing, Painting, Music, Dance & Handwriting [2022 – Present | Hyderabad, India]
+• Manage the institute's website, Google Business Profile, and SEO (Rank Math), improving local search visibility and inbound inquiries.
+• Run social media strategy and content, growing the Instagram presence to 3,000+ followers, and handle reputation management including responses to reviews.
+• Designed data-driven digital marketing and SEO campaigns that increased institutional enrollment by 120%, and manage hiring, scheduling, and resource allocation.
+
+Project Executive & Facilitator | Bajaj Foundation [Present | Government of Telangana Program]
+• Facilitate program activities and on-ground execution for a state government initiative, coordinating with stakeholders and ensuring adherence to program guidelines.
+
+City Operations Head — Hyderabad | Boundless, IITM BS Travel Society [May 2025 – Present | Hyderabad (Hybrid)]
+• Serve as the official Hyderabad city representative for the IITM BS student network, organizing meetups and coordinating regional community engagement.
+• Ensure smooth tour logistics and maintain an active student community presence using local knowledge and leadership.
+
+Core Member | Diplomacia [Jun 2024 – Present]
+• Conduct debate sessions, JAM rounds, candidate screening, and MUN delegate/EB selections as an active core organizational member.
+
+Public Relations Specialist | NebulaPioneers [Jul 2024 – Present | On-site]
+• Manage stakeholder communications and candidate screening/interview pipelines, coordinating cross-functional outreach.
+
+TECHNICAL PROJECTS
+RescueNet AI — Multi-Agent Disaster Response and Survivor Prioritization System
+github.com/Vikram30069/RescueNet-AI
+• Architected a 10-agent CrewAI pipeline (triage, resource allocation, hospital matching, dispatch) with task-context chaining, backed by a FastAPI/Pydantic v2 service and PostgreSQL/Supabase database integrating 148 real Telangana emergency assets.
+• Integrated Twilio WhatsApp/voice dispatch for real-time responder alerts, configured multi-provider LLM support (OpenAI, Gemini, Ollama, LiteLLM), and deployed on AWS (ECS, RDS, S3, CloudFront, Bedrock) with a Next.js dashboard and GitHub CI/CD.
+
+Datadrishti (Paytm IntentGuard) — Contextual Payment Security Layer
+github.com/Vikram30069/datadrishti
+• Built a behavioral anomaly detection layer protecting UPI transfers against coercion, distress, and panic-induced fraud, using personal-baseline analytics (Median/MAD distributions) instead of vulnerable arithmetic averages.
+• Designed 6 calibrated, weighted risk signals (Amount, Recipient/Device Novelty, Time, Geo, Velocity) driving adaptive friction policies — from frictionless 1-tap transfers to step-up biometric and out-of-band hold verification for high-risk transactions.
+
+HONORS AND ACHIEVEMENTS
+• Gold Medalist — National Science Olympiad (2019–2021) & International Mathematics Olympiad (2020–2021); 5th State Rank, National Level Yoga Competitions; 1st Place, National Level Fine Arts Exhibition, Pondicherry.`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Plaintext resume copied to clipboard for ATS job applications!");
+      });
+    }
+  </script>
 </body>
 </html>
