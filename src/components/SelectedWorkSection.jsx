@@ -99,6 +99,9 @@ export default function SelectedWorkSection() {
   const [inGeofence, setInGeofence] = useState(true);
   const [faceConfidence, setFaceConfidence] = useState(99.4);
 
+  // Chitran Institute Client Project Telemetry State
+  const [chitranView, setChitranView] = useState('production'); // 'production' | 'baseline'
+
   return (
     <section id="projects" className="story-panel" style={{ backgroundColor: 'var(--bg-canvas)' }}>
       <div className="container-custom">
@@ -122,10 +125,10 @@ export default function SelectedWorkSection() {
               marginBottom: '1rem',
             }}
           >
-            Three systems engineered to isolate critical truth.
+            Four production systems engineered to isolate critical truth.
           </h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>
-            Production codebases architected for real-world constraints: sub-second inference, contextual fraud defense, and multi-agent coordination.
+            Production codebases and client-shipped ecosystems: sub-second ML inference, multi-agent coordination, computer vision, and high-conversion web infrastructure.
           </p>
         </div>
 
@@ -772,6 +775,245 @@ export default function SelectedWorkSection() {
               >
                 <span>CONFIDENCE: 99.4%</span>
                 <span>LATENCY: 12ms / FRAME</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* =========================================================================
+            PROJECT 04: CHITRAN INSTITUTE (CLIENT SHIPPED PROJECT)
+            ========================================================================= */}
+        <div
+          className="signal-card"
+          style={{
+            padding: 'clamp(1.75rem, 3.5vw, 3rem)',
+            marginTop: '4rem',
+            borderLeft: '3px solid var(--signal-emerald)',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              gap: '1rem',
+              marginBottom: '1.75rem',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <span className="telemetry-badge badge-emerald">SYSTEM 04 // CLIENT SHIPPED PRODUCTION</span>
+              <span className="telemetry-badge">23-YEAR ARTS INSTITUTE INFRASTRUCTURE</span>
+            </div>
+
+            <a
+              href="https://github.com/Vikram30069/chitran-digital-ecosystem"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary"
+              style={{ padding: '0.5rem 1rem', fontSize: '0.8rem' }}
+            >
+              <GithubIcon size={14} />
+              <span>SOURCE // github.com/Vikram30069/chitran-digital-ecosystem</span>
+            </a>
+          </div>
+
+          <h3
+            className="font-display"
+            style={{
+              fontSize: 'clamp(1.75rem, 2.8vw, 2.5rem)',
+              fontWeight: 700,
+              color: 'var(--text-high)',
+              marginBottom: '0.5rem',
+            }}
+          >
+            Chitran Institute — Digital Ecosystem &amp; Growth Engine
+          </h3>
+          <div
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.95rem',
+              color: 'var(--signal-emerald)',
+              marginBottom: '1.5rem',
+            }}
+          >
+            Client Shipped Portal, Rank Math SEO Automation &amp; Conversion Pipeline
+          </div>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: '2.5rem',
+            }}
+          >
+            <div>
+              <p style={{ color: 'var(--text-primary)', fontSize: '0.96rem', lineHeight: 1.6, marginBottom: '1.25rem' }}>
+                Engineered and shipped full-cycle digital transformation for Chitran Institute (23-year-old cultural institution specializing in drawing, painting, music, dance, and handwriting in Hyderabad). Directed end-to-end technical infrastructure, automated search indexing, and customer acquisition funnels.
+              </p>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div style={{ background: 'rgba(255,255,255,0.02)', padding: '1rem', borderRadius: '3px', border: '1px solid var(--border-subtle)' }}>
+                  <div style={{ color: 'var(--signal-emerald)', fontFamily: 'var(--font-mono)', fontSize: '0.8rem', fontWeight: 600, marginBottom: '0.35rem' }}>
+                    01. Web Platform &amp; Local Search Authority
+                  </div>
+                  <div style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', lineHeight: 1.5 }}>
+                    Custom responsive portal built with modular CMS architecture, integrated Rank Math SEO automation with localized schema markup, and live Google Business Profile synchronization.
+                  </div>
+                </div>
+
+                <div style={{ background: 'rgba(255,255,255,0.02)', padding: '1rem', borderRadius: '3px', border: '1px solid var(--border-subtle)' }}>
+                  <div style={{ color: 'var(--signal-emerald)', fontFamily: 'var(--font-mono)', fontSize: '0.8rem', fontWeight: 600, marginBottom: '0.35rem' }}>
+                    02. Quantified Conversion &amp; Enrollment Surge (+120%)
+                  </div>
+                  <div style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', lineHeight: 1.5 }}>
+                    Architected digital marketing campaigns and streamlined enrollment intake funnels that directly increased active student enrollment by 120% year-over-year.
+                  </div>
+                </div>
+
+                <div style={{ background: 'rgba(255,255,255,0.02)', padding: '1rem', borderRadius: '3px', border: '1px solid var(--border-subtle)' }}>
+                  <div style={{ color: 'var(--signal-emerald)', fontFamily: 'var(--font-mono)', fontSize: '0.8rem', fontWeight: 600, marginBottom: '0.35rem' }}>
+                    03. Community Scaling &amp; Reputation Pipeline
+                  </div>
+                  <div style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', lineHeight: 1.5 }}>
+                    Scaled organic Instagram community to 3,000+ targeted followers, established automated review collection protocols, and maintained stellar institutional reputation.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Interactive Client Metric Telemetry Engine */}
+            <div
+              style={{
+                background: 'rgba(0,0,0,0.45)',
+                border: '1px solid var(--border-subtle)',
+                borderRadius: '4px',
+                padding: '1.5rem',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.76rem',
+                    color: 'var(--text-muted)',
+                    marginBottom: '1rem',
+                  }}
+                >
+                  <span>CLIENT TELEMETRY COMPARATOR</span>
+                  <span style={{ color: 'var(--signal-emerald)' }}>
+                    STATUS: SHIPPED &amp; LIVE
+                  </span>
+                </div>
+
+                {/* View Switch Buttons */}
+                <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.25rem' }}>
+                  <button
+                    onClick={() => setChitranView('baseline')}
+                    style={{
+                      flex: 1,
+                      background: chitranView === 'baseline' ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.02)',
+                      border: chitranView === 'baseline' ? '1px solid var(--border-highlight)' : '1px solid var(--border-subtle)',
+                      color: chitranView === 'baseline' ? 'var(--text-high)' : 'var(--text-muted)',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.72rem',
+                      padding: '0.45rem',
+                      borderRadius: '2px',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    PRE-DEPLOYMENT [2022]
+                  </button>
+                  <button
+                    onClick={() => setChitranView('production')}
+                    style={{
+                      flex: 1,
+                      background: chitranView === 'production' ? 'var(--signal-emerald-dim)' : 'rgba(255,255,255,0.02)',
+                      border: chitranView === 'production' ? '1px solid var(--signal-emerald)' : '1px solid var(--border-subtle)',
+                      color: chitranView === 'production' ? 'var(--signal-emerald)' : 'var(--text-muted)',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.72rem',
+                      padding: '0.45rem',
+                      borderRadius: '2px',
+                      cursor: 'pointer',
+                      fontWeight: 600,
+                    }}
+                  >
+                    SHIPPED CLIENT [LIVE]
+                  </button>
+                </div>
+
+                {/* Metric Readout Cards */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                  <div style={{ background: 'rgba(255,255,255,0.02)', padding: '0.85rem', borderRadius: '3px', border: '1px solid var(--border-subtle)' }}>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: 'var(--text-muted)', marginBottom: '0.2rem' }}>
+                      STUDENT ENROLLMENT
+                    </div>
+                    <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.35rem', fontWeight: 700, color: chitranView === 'production' ? 'var(--signal-emerald)' : 'var(--text-muted)' }}>
+                      {chitranView === 'production' ? '+120% SURGE' : 'BASELINE'}
+                    </div>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: 'var(--text-secondary)' }}>
+                      {chitranView === 'production' ? 'Multiplied intake capacity' : 'Offline walk-ins only'}
+                    </div>
+                  </div>
+
+                  <div style={{ background: 'rgba(255,255,255,0.02)', padding: '0.85rem', borderRadius: '3px', border: '1px solid var(--border-subtle)' }}>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: 'var(--text-muted)', marginBottom: '0.2rem' }}>
+                      RANK MATH SEO SCORE
+                    </div>
+                    <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.35rem', fontWeight: 700, color: chitranView === 'production' ? 'var(--signal-emerald)' : 'var(--text-muted)' }}>
+                      {chitranView === 'production' ? '98 / 100' : '41 / 100'}
+                    </div>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: 'var(--text-secondary)' }}>
+                      {chitranView === 'production' ? '#1-3 Local Hyderabad Search' : 'Unindexed keywords'}
+                    </div>
+                  </div>
+
+                  <div style={{ background: 'rgba(255,255,255,0.02)', padding: '0.85rem', borderRadius: '3px', border: '1px solid var(--border-subtle)' }}>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: 'var(--text-muted)', marginBottom: '0.2rem' }}>
+                      COMMUNITY REACH
+                    </div>
+                    <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.35rem', fontWeight: 700, color: chitranView === 'production' ? 'var(--signal-emerald)' : 'var(--text-muted)' }}>
+                      {chitranView === 'production' ? '3,000+' : '< 200'}
+                    </div>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: 'var(--text-secondary)' }}>
+                      {chitranView === 'production' ? 'Active student community' : 'Stagnant digital reach'}
+                    </div>
+                  </div>
+
+                  <div style={{ background: 'rgba(255,255,255,0.02)', padding: '0.85rem', borderRadius: '3px', border: '1px solid var(--border-subtle)' }}>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: 'var(--text-muted)', marginBottom: '0.2rem' }}>
+                      INFRASTRUCTURE
+                    </div>
+                    <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.35rem', fontWeight: 700, color: chitranView === 'production' ? 'var(--signal-emerald)' : 'var(--text-muted)' }}>
+                      {chitranView === 'production' ? '99.9% UPTIME' : 'LEGACY'}
+                    </div>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: 'var(--text-secondary)' }}>
+                      {chitranView === 'production' ? 'Automated daily backup' : 'Manual unmanaged'}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.74rem',
+                  color: 'var(--text-muted)',
+                  borderTop: '1px solid var(--border-subtle)',
+                  paddingTop: '0.85rem',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}
+              >
+                <span>CLIENT TENURE: 2022–PRESENT</span>
+                <span style={{ color: 'var(--signal-emerald)' }}>VERIFIED PRODUCTION DEPLOYMENT</span>
               </div>
             </div>
           </div>

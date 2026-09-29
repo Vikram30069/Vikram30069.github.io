@@ -141,7 +141,7 @@ export default function HeroSection() {
                 <div className="signal-bar-segment" style={{ animationDelay: '0.5s' }} />
               </div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
-                <span style={{ color: 'var(--signal-cyan)' }}>SIGNAL PROTOCOL:</span> 3 FLAGSHIP ARCHITECTURES ACTIVE
+                <span style={{ color: 'var(--signal-cyan)' }}>SIGNAL PROTOCOL:</span> 4 PRODUCTION ARCHITECTURES ACTIVE (INCL. CLIENT SHIPPED)
               </div>
             </div>
 
