@@ -33,8 +33,6 @@ export default function FloatingDock({ activeSection = 'hero' }) {
     }
   };
 
-  if (!isVisible) return null;
-
   const dockItems = [
     { id: 'hero', label: 'Home', icon: Home },
     { id: 'about', label: 'About', icon: Terminal },
@@ -53,19 +51,22 @@ export default function FloatingDock({ activeSection = 'hero' }) {
         position: 'fixed',
         bottom: '1.5rem',
         left: '50%',
-        transform: 'translateX(-50%)',
+        transform: isVisible ? 'translateX(-50%) translateY(0)' : 'translateX(-50%) translateY(36px)',
+        opacity: isVisible ? 1 : 0,
+        pointerEvents: isVisible ? 'auto' : 'none',
+        visibility: isVisible ? 'visible' : 'hidden',
         zIndex: 999,
         display: 'flex',
         alignItems: 'center',
         gap: '0.35rem',
         padding: '0.4rem 0.65rem',
-        background: 'rgba(10, 14, 22, 0.88)',
+        background: 'rgba(10, 14, 22, 0.92)',
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
         border: '1px solid rgba(255, 255, 255, 0.12)',
         borderRadius: '50px',
         boxShadow: '0 8px 32px rgba(0, 0, 0, 0.6), 0 0 15px rgba(0, 240, 255, 0.08)',
-        transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+        transition: 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.45s',
       }}
     >
       {/* Navigation Pills */}

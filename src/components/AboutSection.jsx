@@ -10,7 +10,7 @@ export default function AboutSection() {
     <section id="about" className="story-panel" style={{ backgroundColor: 'var(--bg-canvas)' }}>
       <div className="container-custom">
         {/* Panel Index */}
-        <div className="panel-index">
+        <div className="panel-index scroll-reveal-left">
           <span className="index-num">01</span>
           <span className="index-status">THESIS // SIGNAL EXTRACTION</span>
           <span style={{ color: 'rgba(255,255,255,0.2)' }}>/</span>
@@ -18,7 +18,7 @@ export default function AboutSection() {
         </div>
 
         {/* Narrative Headline */}
-        <div style={{ maxWidth: '920px', marginBottom: '3.5rem' }}>
+        <div className="scroll-reveal" style={{ maxWidth: '920px', marginBottom: '3.5rem' }}>
           <h2
             className="font-display"
             style={{
@@ -55,7 +55,7 @@ export default function AboutSection() {
           }}
         >
           {/* Left Column: Dual Degree & Operational Grounding */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <div className="scroll-reveal-scale reveal-delay-1" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {/* Tab Selector: Engineering Architecture vs Operational Leadership */}
             <div
               style={{
@@ -226,7 +226,7 @@ export default function AboutSection() {
 
           {/* Right Column: Visual Proof of Work (Authentic Hackathon & Engineering Photography) */}
           <div
-            className="signal-card"
+            className="signal-card scroll-reveal-scale reveal-delay-2"
             style={{
               padding: '1.5rem',
               display: 'flex',

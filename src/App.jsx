@@ -59,6 +59,52 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Kinetic Scroll Reveal Observer (Inspired by nikolaradeski.com)
+  useEffect(() => {
+    // Respect prefers-reduced-motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      document.querySelectorAll('.scroll-reveal, .scroll-reveal-scale, .scroll-reveal-left').forEach((el) => {
+        el.classList.add('is-revealed');
+      });
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.05,
+        rootMargin: '0px 0px -40px 0px',
+      }
+    );
+
+    const observeElements = () => {
+      const elements = document.querySelectorAll('.scroll-reveal, .scroll-reveal-scale, .scroll-reveal-left');
+      elements.forEach((el) => observer.observe(el));
+    };
+
+    observeElements();
+
+    // Fallback safety timeout: ensures zero content is ever hidden
+    const timeout = setTimeout(() => {
+      document.querySelectorAll('.scroll-reveal, .scroll-reveal-scale, .scroll-reveal-left').forEach((el) => {
+        el.classList.add('is-revealed');
+      });
+    }, 3000);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(timeout);
+    };
+  }, []);
+
   return (
     <div style={{ position: 'relative', width: '100%', minHeight: '100vh', backgroundColor: 'var(--bg-canvas)' }}>
       {/* Skip to Main Content Link for Keyboard & Screen Reader Accessibility */}

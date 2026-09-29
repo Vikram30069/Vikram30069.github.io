@@ -34,14 +34,14 @@ export default function ContactSection() {
     <section id="contact" className="story-panel" style={{ backgroundColor: 'var(--bg-canvas)', borderBottom: 'none' }}>
       <div className="container-custom">
         {/* Panel Index */}
-        <div className="panel-index">
+        <div className="panel-index scroll-reveal-left">
           <span className="index-num">06</span>
           <span className="index-status">OPEN TRANSMISSION // DIRECT CHANNEL</span>
           <span style={{ color: 'rgba(255,255,255,0.2)' }}>/</span>
           <span style={{ color: 'var(--text-muted)' }}>HYDERABAD, INDIA</span>
         </div>
 
-        <div style={{ maxWidth: '840px', marginBottom: '3.5rem' }}>
+        <div className="scroll-reveal" style={{ maxWidth: '840px', marginBottom: '3.5rem' }}>
           <h2
             className="font-display"
             style={{
@@ -70,7 +70,7 @@ export default function ContactSection() {
           }}
         >
           {/* Left: Direct Access Coordinates */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <div className="scroll-reveal-scale reveal-delay-1" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {/* Primary Email Card */}
             <div className="signal-card" style={{ padding: '1.75rem' }}>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>
@@ -206,7 +206,7 @@ export default function ContactSection() {
 
           {/* Right: Interactive Signal Transmission Console */}
           <div
-            className="signal-card"
+            className="signal-card scroll-reveal-scale reveal-delay-2"
             style={{
               padding: '2rem',
               borderTop: '2px solid var(--signal-cyan)',
@@ -332,6 +332,7 @@ export default function ContactSection() {
 
         {/* Engineering Colophon & Architectural Footer */}
         <footer
+          className="scroll-reveal"
           style={{
             marginTop: '5rem',
             paddingTop: '2.5rem',

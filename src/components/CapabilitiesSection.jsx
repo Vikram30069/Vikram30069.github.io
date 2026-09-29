@@ -94,14 +94,14 @@ export default function CapabilitiesSection() {
     <section id="capabilities" className="story-panel" style={{ backgroundColor: 'var(--bg-canvas)' }}>
       <div className="container-custom">
         {/* Panel Index */}
-        <div className="panel-index">
+        <div className="panel-index scroll-reveal-left">
           <span className="index-num">03</span>
           <span className="index-status">TECHNICAL MATRIX // CAPABILITIES</span>
           <span style={{ color: 'rgba(255,255,255,0.2)' }}>/</span>
           <span style={{ color: 'var(--text-muted)' }}>PRODUCTION CAPACITIES</span>
         </div>
 
-        <div style={{ maxWidth: '840px', marginBottom: '3.5rem' }}>
+        <div className="scroll-reveal" style={{ maxWidth: '840px', marginBottom: '3.5rem' }}>
           <h2
             className="font-display"
             style={{
@@ -121,7 +121,9 @@ export default function CapabilitiesSection() {
         </div>
 
         {/* Live Interactive Command Center (Typing Simulator) */}
-        <InteractiveTerminal />
+        <div className="scroll-reveal-scale">
+          <InteractiveTerminal />
+        </div>
 
         {/* 6 Architectural Matrices */}
         <div
@@ -131,10 +133,10 @@ export default function CapabilitiesSection() {
             gap: '1.75rem',
           }}
         >
-          {capabilityGroups.map((group) => (
+          {capabilityGroups.map((group, idx) => (
             <div
               key={group.id}
-              className="signal-card"
+              className={`signal-card scroll-reveal-scale reveal-delay-${(idx % 3) + 1}`}
               onMouseEnter={() => sound.playHover()}
               style={{
                 padding: '1.75rem',

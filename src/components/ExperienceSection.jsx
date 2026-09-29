@@ -1,5 +1,6 @@
 import React from 'react';
 import { Briefcase, TrendingUp, Cpu, Users, Building2, Award } from 'lucide-react';
+import sound from '../utils/soundEffects';
 
 export default function ExperienceSection() {
   const experiences = [
@@ -95,14 +96,14 @@ export default function ExperienceSection() {
     <section id="experience" className="story-panel" style={{ backgroundColor: 'var(--bg-canvas)' }}>
       <div className="container-custom">
         {/* Panel Index */}
-        <div className="panel-index">
+        <div className="panel-index scroll-reveal-left">
           <span className="index-num">04</span>
           <span className="index-status">CHRONOLOGY // TIMELINE &amp; OPERATIONS</span>
           <span style={{ color: 'rgba(255,255,255,0.2)' }}>/</span>
           <span style={{ color: 'var(--text-muted)' }}>6 CONCURRENT &amp; PROGRESSIVE TRACKS</span>
         </div>
 
-        <div style={{ maxWidth: '840px', marginBottom: '3.5rem' }}>
+        <div className="scroll-reveal" style={{ maxWidth: '840px', marginBottom: '3.5rem' }}>
           <h2
             className="font-display"
             style={{
@@ -123,10 +124,10 @@ export default function ExperienceSection() {
 
         {/* Timeline Sequence Container */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-          {experiences.map((item) => (
+          {experiences.map((item, idx) => (
             <div
               key={item.index}
-              className="signal-card"
+              className={`signal-card scroll-reveal-scale reveal-delay-${(idx % 2) + 1}`}
               style={{
                 padding: 'clamp(1.5rem, 3vw, 2.25rem)',
                 display: 'grid',
@@ -135,7 +136,10 @@ export default function ExperienceSection() {
                 borderLeft: '2px solid var(--border-subtle)',
                 transition: 'border-left-color 0.2s ease',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.borderLeftColor = 'var(--signal-cyan)')}
+              onMouseEnter={(e) => {
+                sound.playHover();
+                e.currentTarget.style.borderLeftColor = 'var(--signal-cyan)';
+              }}
               onMouseLeave={(e) => (e.currentTarget.style.borderLeftColor = 'var(--border-subtle)')}
             >
               {/* Left Column: Organization, Role, Period */}

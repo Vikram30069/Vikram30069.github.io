@@ -67,14 +67,14 @@ export default function EducationSection() {
     <section id="education" className="story-panel" style={{ backgroundColor: 'var(--bg-canvas)' }}>
       <div className="container-custom">
         {/* Panel Index */}
-        <div className="panel-index">
+        <div className="panel-index scroll-reveal-left">
           <span className="index-num">05</span>
           <span className="index-status">PEDIGREE // EDUCATION &amp; CREDENTIALS</span>
           <span style={{ color: 'rgba(255,255,255,0.2)' }}>/</span>
           <span style={{ color: 'var(--text-muted)' }}>DUAL ACADEMIC &amp; COMPETITIVE RECORD</span>
         </div>
 
-        <div style={{ maxWidth: '840px', marginBottom: '3.5rem' }}>
+        <div className="scroll-reveal" style={{ maxWidth: '840px', marginBottom: '3.5rem' }}>
           <h2
             className="font-display"
             style={{
@@ -105,7 +105,7 @@ export default function EducationSection() {
           {credentials.map((edu, idx) => (
             <div
               key={idx}
-              className="signal-card"
+              className={`signal-card scroll-reveal-scale reveal-delay-${idx + 1}`}
               style={{
                 padding: '2rem',
                 display: 'flex',
@@ -198,7 +198,7 @@ export default function EducationSection() {
           {certifications.map((cert, cIdx) => (
             <div
               key={cIdx}
-              className="signal-card"
+              className="signal-card scroll-reveal-scale reveal-delay-1"
               style={{
                 padding: '2rem',
                 borderLeft: '3px solid var(--signal-cyan)',
@@ -247,7 +247,7 @@ export default function EducationSection() {
 
           {/* Olympiad Honors Card */}
           <div
-            className="signal-card"
+            className="signal-card scroll-reveal-scale reveal-delay-2"
             style={{
               padding: '2rem',
               borderLeft: '3px solid var(--signal-amber)',

@@ -113,14 +113,14 @@ export default function SelectedWorkSection() {
     <section id="projects" className="story-panel" style={{ backgroundColor: 'var(--bg-canvas)' }}>
       <div className="container-custom">
         {/* Panel Index */}
-        <div className="panel-index">
+        <div className="panel-index scroll-reveal-left">
           <span className="index-num">02</span>
           <span className="index-status">SELECTED WORK // PRODUCTION ARCHITECTURES</span>
           <span style={{ color: 'rgba(255,255,255,0.2)' }}>/</span>
           <span style={{ color: 'var(--text-muted)' }}>BEHAVIORAL ML, MULTI-AGENT, COMPUTER VISION</span>
         </div>
 
-        <div style={{ maxWidth: '840px', marginBottom: '4rem' }}>
+        <div className="scroll-reveal" style={{ maxWidth: '840px', marginBottom: '4rem' }}>
           <h2
             className="font-display"
             style={{
@@ -143,7 +143,7 @@ export default function SelectedWorkSection() {
             PROJECT 01: DATADRISHTI (Paytm IntentGuard)
             ========================================================================= */}
         <div
-          className={`signal-card ${riskScore > 80 ? 'card-alert' : ''}`}
+          className={`signal-card scroll-reveal-scale ${riskScore > 80 ? 'card-alert' : ''}`}
           style={{
             padding: 'clamp(1.75rem, 3.5vw, 3rem)',
             marginBottom: '4rem',
@@ -479,7 +479,7 @@ export default function SelectedWorkSection() {
             PROJECT 02: RESCUENET AI
             ========================================================================= */}
         <div
-          className="signal-card"
+          className="signal-card scroll-reveal-scale"
           style={{
             padding: 'clamp(1.75rem, 3.5vw, 3rem)',
             marginBottom: '4rem',
@@ -775,7 +775,7 @@ export default function SelectedWorkSection() {
             PROJECT 03: NODIN
             ========================================================================= */}
         <div
-          className="signal-card"
+          className="signal-card scroll-reveal-scale"
           style={{
             padding: 'clamp(1.75rem, 3.5vw, 3rem)',
             borderLeft: '3px solid var(--signal-cyan)',
@@ -1141,7 +1141,7 @@ export default function SelectedWorkSection() {
             PROJECT 04: CHITRAN INSTITUTE (CLIENT SHIPPED PROJECT)
             ========================================================================= */}
         <div
-          className="signal-card"
+          className="signal-card scroll-reveal-scale"
           style={{
             padding: 'clamp(1.75rem, 3.5vw, 3rem)',
             marginTop: '4rem',
