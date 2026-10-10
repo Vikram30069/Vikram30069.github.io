@@ -43,9 +43,13 @@ To update or swap Vikram's photo:
 
 - **Runtime & Bundler**: Vite 8 + React 19
 - **3D WebGL Layer**: Custom Three.js particle tensor field featuring cursor-reactive wave deformation and real-time alert anomaly spikes.
+- **Synthesizer SFX Engine**: Pure Web Audio API procedural synthesizer (`src/utils/soundEffects.js`) generating crisp cybernetic UI audio feedback (clicks, hums, switches, success tones) with persistent mute control.
+- **Kinetic Floating Dock**: Persistent ergonomic navigation bar (`src/components/FloatingDock.jsx`) inspired by Nikola Radeski with active section indicator, audio toggle, and direct ATS resume download.
+- **Interactive Terminal**: Full-featured bash emulator (`src/components/InteractiveTerminal.jsx`) with command history, responsive suggestions, and executable shortcuts (`help`, `about`, `skills`, `projects`, `contact`, `clear`).
 - **Smooth Inertia Scroll**: Lenis for physical scroll weighting (automatically disabled if `prefers-reduced-motion` is detected).
 - **Styling**: Pure CSS Variables design system (`src/index.css`) with zero generic framework defaults.
 - **Typography**: Google Fonts — *Space Grotesk* (Display), *Inter* (Body text), and *JetBrains Mono* (Telemetry & indices).
+- **CI/CD Deployment**: Automated zero-downtime deployment to GitHub Pages via GitHub Actions workflow (`.github/workflows/deploy.yml`).
 
 ---
 
@@ -81,16 +85,28 @@ npm run preview
 
 ```text
 portfoliowebsite/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml                      # GitHub Actions automated build & Pages deployment
 ├── public/
-│   └── assets/
-│       ├── vikram_portrait_editorial.jpg   # Art-directed hero portrait with signal bokeh
-│       ├── vikram_portrait_original.jpg    # Authentic high-res studio headshot
-│       ├── vikram_paytm_hackathon.png      # On-site Paytm hackathon proof-of-work photo
-│       ├── vikram_pair_programming.png     # Pair programming hackathon photo
-│       └── vikram_dali_mural.png           # Original user image
+│   ├── assets/
+│   │   ├── vikram_portrait_editorial.jpg   # Art-directed hero portrait with signal bokeh
+│   │   ├── vikram_portrait_original.jpg    # Authentic high-res studio headshot
+│   │   ├── datadrishti_dashboard_ui.jpg    # High-res Datadrishti security intelligence mockup
+│   │   ├── rescuenet_dashboard_ui.jpg      # High-res RescueNet multi-agent dispatch mockup
+│   │   ├── nodin_dashboard_ui.jpg          # High-res NodIn biometric & spatial telemetry mockup
+│   │   ├── chitran_hero_dance.png          # Chitran Institute live client platform capture
+│   │   ├── chitran_curriculum_ui.png       # Chitran Institute curriculum telemetry
+│   │   ├── vikram_paytm_hackathon.png      # On-site Paytm hackathon proof-of-work photo
+│   │   └── vikram_pair_programming.png     # Pair programming hackathon photo
+│   └── resume.html                         # Official 1-page ATS technical resume
 ├── src/
 │   ├── components/
 │   │   ├── Navigation.jsx                  # Header with live Hyderabad IST clock & [00]-[06] index
+│   │   ├── FloatingDock.jsx                # Nikola Radeski kinetic floating dock with audio toggle
+│   │   ├── InteractiveTerminal.jsx         # Interactive browser shell emulator
+│   │   ├── KineticMarquee.jsx              # High-velocity typography marquee
+│   │   ├── TypewriterPrompt.jsx            # Dynamic terminal typewriter animation
 │   │   ├── SignalCanvas3D.jsx              # Three.js WebGL particle tensor & anomaly field
 │   │   ├── HeroSection.jsx                 # Orchestrated hero panel with interactive portrait frame
 │   │   ├── AboutSection.jsx                # "Signal Thesis" narrative, dual-degree, and photo proof
@@ -100,6 +116,8 @@ portfoliowebsite/
 │   │   ├── EducationSection.jsx            # IIT Madras, Matrusri, AWS certification, IMO/NSO medals
 │   │   ├── ContactSection.jsx              # Encrypted transmission console & direct endpoints
 │   │   └── Icons.jsx                       # Lightweight SVG vector icons (Github, Linkedin)
+│   ├── utils/
+│   │   └── soundEffects.js                 # Web Audio procedural synthesizer sound effects
 │   ├── App.jsx                             # Lenis smooth scroll & scroll-linked story orchestrator
 │   ├── index.css                           # Obsidian design system, color tokens, and matrix grid
 │   └── main.jsx                            # React root mount
@@ -130,5 +148,14 @@ portfoliowebsite/
    - `Rank Math SEO Score`: 98 / 100 (#1-3 Local Search Position in Hyderabad)
    - `Community Growth`: 3,000+ organic students
 
-5. **Hyderabad IST Live Telemetry**:
+5. **Web Audio Procedural Sound Effects**:
+   Synthesizes soft sci-fi micro-interactions on hover and click with a one-click audio mute button.
+
+6. **Nikola Radeski Floating Navigation Dock**:
+   Floating glassmorphism dock tracking active scroll sections with kinetic scale responses and quick ATS resume access.
+
+7. **Interactive Command Shell**:
+   Terminal interface with tab completion, command history, and instant system inspection.
+
+8. **Hyderabad IST Live Telemetry**:
    Accurate live clock synced with `Asia/Kolkata` time zone directly in the persistent navigation bar.
